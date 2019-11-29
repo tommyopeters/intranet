@@ -20,6 +20,8 @@
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             header('Location: login.php');
         }
+
+        //FORM SUBMISSION INPUTS CHECK
         if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password-prev']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password-prev'])){
             $username = $_POST['username'];
             $department = $_POST['department'];
@@ -27,47 +29,62 @@
             $password_prev = $_POST['password-prev'];
             $password_new = $_POST['password-new'];
 
+            //CHECK IF BOTH USERNAME AND EMAIL ARE WRONG. RETURN ERROR IF BOTH ARE WRONG. VALIDATION IS REQUIRED
             if($username !== $_SESSION['username'] && $email !== $_SESSION['email'] ){
                 echo "wrong username and email<br>";
-                // header("Location: profile.php?error=username&email");
-            }else if($username !== $_SESSION['username']){
+                header("Location: profile.php?error=username&email");
+            }
+            //CHECK IF ONLY USERNAME IS DIFFERENT.
+            else if($username !== $_SESSION['username']){
                 echo "username change <br>";
 
+                //CHECK IF NEW USERNAME EXISTS IN DATABASE ALREADY. IF SO, EXIT WITH ERROR
                 $quickChecksql = "SELECT * FROM workers WHERE username = :username";
                 $quickCheckStmt = $connection->prepare($quickChecksql);
-                echo $username. "<br>";
                 $quickCheckStmt->execute(['username' => $username]);
-                echo $quickCheckStmt->rowCount() . "<br>";
-                print_r($quickCheckStmt->fetch(PDO::FETCH_ASSOC));
                 if($quickCheckStmt->rowCount() > 0){
                     echo "username already exists <br>";
-                }else{
+                    header("Location: profile.php?error=username_exists");
+                }
+                //IF NEW USERNAME DOESN'T EXIST, PROCEED
+                else{
+                    //GET THE FORMER DETAILS OF THE USER FROM THE DATABASE FOR COMPARISON AND CHANGE USING email NOT username (because username is already different)
                     $usernamesql = "SELECT * FROM workers WHERE email = :email";
                     $usernameStmt = $connection->prepare($usernamesql);
                     $usernameStmt->execute(['email' => $email]);
+                    //if email query doesn't return value, throw error
                     if($usernameStmt->rowCount() < 1){
-                        echo "<p class='text-danger'>unexpected error. Wrong Email</p>";
+                        echo "<p class='text-danger'>Unexpected error. Wrong Email</p>";
                     } else {
                         $usernameData = $usernameStmt->fetch(PDO::FETCH_ASSOC);
-    
+                        
+                        //CHECK IF PASSWORD IS CORRECT TO PROCEED
                         if ($usernameData['password'] == $password_prev){
                             echo "correct password<br>";
-    
+                            
+                            // CHECK IF THERE'S NO CHANGE IN PASSWORD. THEN DON'T CHANGE PASSWORD IN DATABASE
                             if(empty($password_new) ||$password_new == $password_prev){
                                 echo "no new password <br>";
-    
+                                
+                                //CHECK IF THERE'S CHANGE IN DEPARTMENT. IF SO, THEN CHANGE department AND username IN DATABASE
                                 if($department !== $_SESSION['department']){
                                     echo "change department and username<br>";
+
+                                    //CHANGE SQL STATEMENT FOR department AND username
                                     $changesql = "UPDATE workers SET username=:username , department=:department WHERE email = :email";
                                     $changeStmt = $connection->prepare($changesql);
                                     $changeStmt->execute(['username' => $username, 'department' => $department, 'email' => $email]);
 
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
                                     $sql = "SELECT * FROM workers WHERE email = :email";
                                     $stmt = $connection->prepare($sql);
                                     $stmt->execute(['email' => $email]);
+                                    //check if updated values aren't retrievable .Return fatal error
                                     if($stmt->rowCount() < 1){
                                         echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
-                                    }else{
+                                    }
+                                    //else set LOGIN information
+                                    else{
                                         $data = $stmt->fetch(PDO::FETCH_ASSOC);
                                         $_SESSION['loggedin'] = true;
                                         $_SESSION['user_id'] = $data['id'];
@@ -75,22 +92,107 @@
                                         $_SESSION['email'] = $data['email'];
                                         $_SESSION['department'] = $data['department'];
 
-                                        // header('Location: ./index.php');
+                                        header('Location: ./profile.php?success=username+department');
                                     }
-                                }else{
-                                    echo "just change username <br>";
                                 }
-                            }else{
+                                //CHECK IF THERE'S NO CHANGE IN DEPARTMENT. IF SO, CHANGE ONLY username
+                                else{
+                                    echo "just change username <br>";
+
+                                    //CHANGE SQL STATEMENT FOR username
+                                    $changesql = "UPDATE workers SET username=:username WHERE email = :email";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['username' => $username, 'email' => $email]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE email = :email";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['email' => $email]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=username');
+                                    }
+                                }
+                            }
+                            // CHECK IF THERE'S CHANGE IN PASSWORD. THEN CHANGE password IN DATABASE WITH username
+                            else{
                                 echo "password change <br>";
+
+                                //CHECK IF THERE'S CHANGE IN DEPARTMENT. IF SO, THEN CHANGE department AND password AND username IN DATABASE
                                 if($department !== $_SESSION['department']){
                                     echo "change department and password and username<br>";
-                                }else{
+
+                                    //CHANGE SQL STATEMENT FOR department AND username AND password
+                                    $changesql = "UPDATE workers SET username=:username , department=:department, password=:password WHERE email = :email";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['username' => $username, 'department' => $department, 'password' => $password_new, 'email' => $email]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE email = :email";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['email' => $email]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=username+department+password');
+                                    }
+                                }
+                                //CHECK IF THERE'S NO CHANGE IN DEPARTMENT, DON'T CHANGE. IF SO, THEN CHANGE ONLY password AND username IN DATABASE
+                                else{
                                     echo "just change username and password<br>";
+
+                                    //CHANGE SQL STATEMENT FOR username AND password
+                                    $changesql = "UPDATE workers SET username=:username , password=:password WHERE email = :email";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['username' => $username, 'password' => $password_new, 'email' => $email]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE email = :email";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['email' => $email]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=username+password');
+                                    }
                                 }
                             }
                             
-                        } else{
-                            // header("Location: profile.php?error=wrong_password");
+                        }
+                        //IF PASSWORD NOT THE SAME, PASSWORD WRONG. THROW PASSWORD ERROR
+                        else{
+                            header("Location: profile.php?error=wrong_password");
                             echo "wrong password<br>";
     
                         }
@@ -99,11 +201,222 @@
             }else if($email !== $_SESSION['email']){
                 echo "email change<br>";
 
+                //CHECK IF NEW email EXISTS IN DATABASE ALREADY. IF SO, EXIT WITH ERROR
+                $quickChecksql = "SELECT * FROM workers WHERE email = :email";
+                $quickCheckStmt = $connection->prepare($quickChecksql);
+                $quickCheckStmt->execute(['email' => $email]);
+                if($quickCheckStmt->rowCount() > 0){
+                    echo "email already exists <br>";
+                    header("Location: profile.php?error=email_exists");
+                }
+                //IF NEW email DOESN'T EXIST, PROCEED
+                else{
+                    //GET THE FORMER DETAILS OF THE USER FROM THE DATABASE FOR COMPARISON AND CHANGE USING username NOT email (because email is already different)
+                    $emailsql = "SELECT * FROM workers WHERE username = :username";
+                    $emailStmt = $connection->prepare($emailsql);
+                    $emailStmt->execute(['username' => $username]);
+                    //if USERNAME query doesn't return value, throw error
+                    if($emailStmt->rowCount() < 1){
+                        echo "<p class='text-danger'>Unexpected error. Wrong Username</p>";
+                    } else {
+                        $emailData = $emailStmt->fetch(PDO::FETCH_ASSOC);
+                        
+                        //CHECK IF PASSWORD IS CORRECT TO PROCEED
+                        if ($emailData['password'] == $password_prev){
+                            echo "correct password<br>";
+                            
+                            // CHECK IF THERE'S NO CHANGE IN PASSWORD. THEN DON'T CHANGE PASSWORD IN DATABASE
+                            if(empty($password_new) ||$password_new == $password_prev){
+                                echo "no new password <br>";
+                                
+                                //CHECK IF THERE'S CHANGE IN DEPARTMENT. IF SO, THEN CHANGE department AND email IN DATABASE
+                                if($department !== $_SESSION['department']){
+                                    echo "change department and email<br>";
 
+                                    //CHANGE SQL STATEMENT FOR department AND email
+                                    $changesql = "UPDATE workers SET email=:email , department=:department WHERE username = :username";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['email' => $email, 'department' => $department, 'username' => $username]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE username = :username";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['username' => $username]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?succes=email+department');
+                                    }
+                                }
+                                //CHECK IF THERE'S NO CHANGE IN DEPARTMENT. IF SO, CHANGE ONLY email
+                                else{
+                                    echo "just change email <br>";
+
+                                    //CHANGE SQL STATEMENT FOR email ONLY
+                                    $changesql = "UPDATE workers SET email=:email WHERE username = :username";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['email' => $email, 'username' => $username]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE username = :username";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['username' => $username]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=email');
+                                    }
+                                }
+                            }
+                            // CHECK IF THERE'S CHANGE IN PASSWORD. THEN CHANGE password IN DATABASE WITH email
+                            else{
+                                echo "password change <br>";
+
+                                //CHECK IF THERE'S CHANGE IN DEPARTMENT. IF SO, THEN CHANGE department AND password AND email IN DATABASE
+                                if($department !== $_SESSION['department']){
+                                    echo "change department and password and email<br>";
+
+                                    //CHANGE SQL STATEMENT FOR department AND email AND password
+                                    $changesql = "UPDATE workers SET email=:email , department=:department, password=:password WHERE username = :username";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['email' => $email, 'department' => $department, 'password' => $password_new, 'username' => $username]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE username = :username";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['username' => $username]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=email+department+password');
+                                    }
+                                }
+                                //CHECK IF THERE'S NO CHANGE IN DEPARTMENT, DON'T CHANGE. IF SO, THEN CHANGE ONLY password AND email IN DATABASE
+                                else{
+                                    echo "just change username and password<br>";
+
+                                    //CHANGE SQL STATEMENT FOR email AND password
+                                    $changesql = "UPDATE workers SET email=:email , password=:password WHERE username = :username";
+                                    $changeStmt = $connection->prepare($changesql);
+                                    $changeStmt->execute(['email' => $email, 'password' => $password_new, 'username' => $username]);
+
+                                    //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                                    $sql = "SELECT * FROM workers WHERE email = :email";
+                                    $stmt = $connection->prepare($sql);
+                                    $stmt->execute(['email' => $email]);
+                                    //check if updated values aren't retrievable .Return fatal error
+                                    if($stmt->rowCount() < 1){
+                                        echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                                    }
+                                    //else set LOGIN information
+                                    else{
+                                        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        $_SESSION['loggedin'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['username'] = $data['username'];
+                                        $_SESSION['email'] = $data['email'];
+                                        $_SESSION['department'] = $data['department'];
+
+                                        header('Location: ./profile.php?success=email+password');
+                                    }
+                                }
+                            }
+                            
+                        }
+                        //IF PASSWORD NOT THE SAME, PASSWORD WRONG. THROW PASSWORD ERROR
+                        else{
+                            header("Location: profile.php?error=wrong_password");
+                            echo "wrong password<br>";
+    
+                        }
+                    };
+                }
             }else if($department !== $_SESSION['department']){
                 echo "change department only<br>";
+
+                //CHANGE SQL STATEMENT FOR department ONLY
+                $changesql = "UPDATE workers SET  department=:department WHERE email = :email";
+                $changeStmt = $connection->prepare($changesql);
+                $changeStmt->execute(['department' => $department , 'email' => $email]);
+
+                //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                $sql = "SELECT * FROM workers WHERE email = :email";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute(['email' => $email]);
+                //check if updated values aren't retrievable .Return fatal error
+                if($stmt->rowCount() < 1){
+                    echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                }
+                //else set LOGIN information
+                else{
+                    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['user_id'] = $data['id'];
+                    $_SESSION['username'] = $data['username'];
+                    $_SESSION['email'] = $data['email'];
+                    $_SESSION['department'] = $data['department'];
+
+                    header('Location: ./profile.php?success=department');
+                }
+
+
             }else if(!empty($password_new) && $password_new !== $password_prev){
                 echo "password change only <br>";
+
+                //CHANGE SQL STATEMENT FOR password ONLY
+                $changesql = "UPDATE workers SET password=:password WHERE email = :email";
+                $changeStmt = $connection->prepare($changesql);
+                $changeStmt->execute(['password' => $password_new, 'email' => $email]);
+
+                //SELECT UPDATED VALUES FROM DATABASE AND SET THE LOGIN INFORMATION
+                $sql = "SELECT * FROM workers WHERE email = :email";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute(['email' => $email]);
+                //check if updated values aren't retrievable .Return fatal error
+                if($stmt->rowCount() < 1){
+                    echo "<p class='text-danger'>Fatal Error. Contact Admin</p>";
+                }
+                //else set LOGIN information
+                else{
+                    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['user_id'] = $data['id'];
+                    $_SESSION['username'] = $data['username'];
+                    $_SESSION['email'] = $data['email'];
+                    $_SESSION['department'] = $data['department'];
+
+                    header('Location: ./profile.php?success=password');
+                }
             }else{
                 echo "no change whatsoever <br>";
             }
