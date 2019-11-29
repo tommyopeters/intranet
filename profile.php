@@ -55,6 +55,7 @@
                     //if email query doesn't return value, throw error
                     if($usernameStmt->rowCount() < 1){
                         echo "<p class='text-danger'>Unexpected error. Wrong Email</p>";
+                        header("Location: profile.php?error=unexpected_wrong_email");
                     } else {
                         $usernameData = $usernameStmt->fetch(PDO::FETCH_ASSOC);
                         
@@ -255,7 +256,7 @@
                                         $_SESSION['email'] = $data['email'];
                                         $_SESSION['department'] = $data['department'];
 
-                                        header('Location: ./profile.php?succes=email+department');
+                                        header('Location: ./profile.php?success=email+department');
                                     }
                                 }
                                 //CHECK IF THERE'S NO CHANGE IN DEPARTMENT. IF SO, CHANGE ONLY email
@@ -450,6 +451,55 @@
         </div>
         <div class="grid-item two col-md-12 col-sm-12">
             <h1 class="header">Edit Profile</h1>
+            <?php 
+                $current_url = $_SERVER['REQUEST_URI'];
+
+                if (strpos($current_url, "error=username&email")){
+                    echo "<p class='text-danger'>Username and Email wrong. You can't change both at once.</p>";
+                }else if(
+                    strpos($current_url, "error=username_exists")){
+                    echo "<p class='text-danger'>Username already exists</p>";
+                }else if(
+                    strpos($current_url, "error=unexpected_wrong_email")){
+                    echo "<p class='text-danger'>Unexpected error with email</p>";
+                }else if(
+                    strpos($current_url, "error=wrong_password")){
+                    echo "<p class='text-danger'>Wrong Password</p>";
+                }else if(
+                    strpos($current_url, "error=email_exists")){
+                    echo "<p class='text-danger'>Email already exists</p>";
+                }else if(
+                    strpos($current_url, "success=username+department")){
+                    echo "<p class='text-success'>Username and Department changed</p>";
+                }else if(
+                    strpos($current_url, "success=username")){
+                    echo "<p class='text-success'>Username changed</p>";
+                }else if(
+                    strpos($current_url, "success=username+department+password")){
+                    echo "<p class='text-success'>Username, Department and Password changed</p>";
+                }else if(
+                    strpos($current_url, "success=username+password")){
+                    echo "<p class='text-success'>Username and Password changed</p>";
+                }else if(
+                    strpos($current_url, "success=email+department+password")){
+                    echo "<p class='text-success'>Email, Department and Password changed</p>";
+                }else if(
+                    strpos($current_url, "success=email+department")){
+                    echo "<p class='text-success'>Email and Department changed</p>";
+                }else if(
+                    strpos($current_url, "success=email")){
+                    echo "<p class='text-success'>Email changed</p>";
+                }else if(
+                    strpos($current_url, "success=email+password")){
+                    echo "<p class='text-success'>Email and Password changed</p>";
+                }else if(
+                    strpos($current_url, "success=department")){
+                    echo "<p class='text-success'>Department changed</p>";
+                }else if(
+                    strpos($current_url, "success=password")){
+                    echo "<p class='text-success'>Password changed</p>";
+                }
+            ?>
             <form action="" method="POST" id="profile-form">
                 <div class="fgroup required">
                     <label for="username">Name</label>
