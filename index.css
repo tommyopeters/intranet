@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+:root{
+	--primary-color: #b50415;
+	--primary-color-hover: #d3071b;
+	--secondary-color: #103063;
+	--secondary-color-hover: #143f85;
+	--primary-color: #b50415;
+	--light-color: rgb(244, 244, 244);
+}
+body{
+    font-family: 'Baskervville', serif;
+}
+nav .navbar{
+    background-color: #fff;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.navbar .navbar-brand img{
+    width: 40%;
+}
+.navbar-item{
+    margin-right: 40px;
+    color: black;
+    text-decoration: none;
+}
+.navbar-itemm{
+    margin-right: 0px;
+    color: black;
+    text-decoration: none;
+}
+.navbar li a{
+    color: black;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.navbar li a:hover{
+    text-decoration: none;
+    opacity: 0.4;
+}
+.navbar-toggler-icon{
+    color: black;
+}
+.dropdown-menu{
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid rgb(29, 29, 29);
+}
+.welcome{
+    margin: 0;
+	padding: 0;
+	background: url(img/bg4.jpg) no-repeat center/cover;
+	width: 100%;
+	height: 45vh;
+    position: relative;
+	overflow: hidden;
+}
+.welcome-text{
+    color: var(--light-color);
+    margin-left: 180px;
+}
+.welcome h1{
+	font-size: 4rem;
+    margin-bottom: 10px;
+    margin-top: 60px;
+}
+.header h2{
+	font-size: 2rem;
+}
+.header .welcome .contentbutton input{
+    background-color: none;
+    border: none;
+    height: 40px;
+    border-radius: 50px;
+}
+.header .welcome .contentbutton button{
+    background-color: none;
+    border: none;
+}
+.header .welcome .contentbutton i{
+    height: 40px;
+    border-radius: 50px;
+}
+.contentbutton{
+    width: 50%;
+}
+.input-group-addon{
+    height: 20%;
+    /* width: 50%; */
+}
+.welcome p{
+    color: var(--light-color);
+}
+.welcomebutton{
+    background-color: rgba(51, 51, 51, 0.6);
+    border: none;
+    margin-right: 80px;
+	transition: 0.3s;
+}
+.welcomebutton a{
+    color: white;
+    padding: 50px;
+}
+.welcomebutton a:hover{
+    text-decoration: none;
+}
+.welcomebutton:hover{
+    background-color: rgba(51, 51, 51, 0.3);
+}
+.btn1{
+    padding: 5px 10px 5px 10px;
+}
+.btn2{
+    padding: 5px 40px 5px 40px;
+}
+.btn3{
+    padding: 5px 50px 5px 50px;
+}
+.buttonInside{
+    position:relative;
+    margin-bottom:10px;
+    width: 40%;
+    border-radius: 80px;
+  }
+  
+  #searchbutton{
+    position:absolute;
+    right: 0px;
+    top: 1px;
+    border:none;
+    height:35px;
+    width:35px;
+    outline:none;
+    text-align:center;
+    font-weight:bold;
+    padding-top:5px;
+  }
+  button:hover{
+    cursor:pointer;
+  }
+  .carddeck{
+      margin-top: 30px;
+      margin-bottom: 40px;
+  }
+  .carddeck .card-deck .card a{
+    background-color: rgba(51, 51, 51, 0.3);
+  }
+  .grid-container {
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: auto auto;
+    padding: 10px;
+    color: #333;
+  }
+  .grid-container h1{
+      font-size: 25px;
+      border-bottom: 1px solid rgb(82, 81, 81);
+  }
+  .grid-item {
+    border: 1px solid rgb(204, 203, 203);
+    border-radius: 20px;
+    padding: 20px;
+    /* font-size: 30px; */
+    /* text-align: center; */
+  }
+.calender h3{
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 20px;
+  }
+.calender h3 a{
+    color: var(--light-color);
+    transition: 0.5s;    
+}
+.calender h3 a:hover{
+    opacity: 0.4;
+    text-decoration: none;
+}
+.cbtn1, .cbtn2{
+    padding: 5px 20px 5px 20px;
+	opacity: 0.6;
+	transition: 0.3s;
+	background-color: black;
+	font-size: 15px;
+}
+.cbtn1{
+    margin-right: 20px;
+}
+.cbtn2{
+    margin-left: 20px;
+}
+ .grid-container .calender .cbtn1 {
+	color: var(--light-color);
+}
+.grid-item dd{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.carddeck .card-deck .card a{
+    color: black;
+}
+.card{
+    transition: 0.5s;
+    margin: 10px;
+}
+.carddeck .card-deck .card a:hover{
+    text-decoration: none;
+    color: rgb(139, 139, 139);
+}
+.cardtext{
+    padding: 8px;
+}
+.card:hover{
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-text{
+    float: right;
+}
+.mb-4, .mb-5{
+    border: none;
+}
+footer{
+    background: #333;
+}
+footer .footer-cols{
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 2rem;
+	text-align: left;
+	font-size: 14px;
+}
+footer .footer-cols ul{
+    list-style: none;
+    color: rgba(255, 255, 255, 0.5);
+}
+footer .footer-cols ul li a{
+    color: rgba(255, 255, 255, 0.3);
+}
+footer .footer-cols ul li a:hover{
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+}
+footer .footer-cols ul li:first-child{
+	font-size: 1.2rem;
+	padding-bottom: 0.5rem;
+	border-bottom: #444 solid 1px;
+	margin-bottom: 1rem;
+}
+footer .footer-bottom{
+    background: #333;
+    color: rgba(255, 255, 255, 0.5);
+	padding: 1rem;
+}
+footer .col1{
+    border-right: 1px solid #444;
+    padding-right: 50px;
+}
+.footer-bottom a{
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: underline;
+}
+hr{
+    background-color: #444;
+    width: 50%;
+    margin: 0px;
+    position: relative;
+    left: 25%;
+}
+
+@media screen and (max-width: 568px){
+.welcome-text{
+    font-size: 10px;
+    padding-top: 0px;
+}
+footer .footer-cols{
+	font-size: 10px;
+}
+footer .footer-cols ul li:first-child{
+	font-size: 0.5rem;
+}
+footer .col1{
+    padding-right: 10px;
+}
+footer .col2{
+    padding-left: 0px;
+}
+}
+
+@media screen and (max-width: 580px){
+.modal-body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: auto;
+}
+.grid1 {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto;
+}
+.welcome-text{
+    margin-left: 50px;
+}
+.card{
+    font-size: 5px;
+}
+}
+
+@media screen and (max-width: 600px){
+.grid1 {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto;
+}
+footer .footer-cols{
+	font-size: 14px;
+}
+footer .footer-cols ul li:first-child{
+	font-size: 1rem;
+}
+footer .col1{
+    padding-right: 20px;
+}
+footer .col2{
+    padding-left: 0px;
+}
+}
+
+@media screen and (max-width: 780px){
+.modal-body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: auto;
+}
+.grid1 {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto;
+}
+.hide-on-small{
+    display: none;
+}
+.welcome-text{
+    margin-left: 80px;
+}
+footer .footer-cols{
+	font-size: 14px;
+}
+footer .footer-cols ul li:first-child{
+	font-size: 1.2rem;
+}
+footer .col1{
+    padding-right: 30px;
+}
+footer .col2{
+    padding-left: 0px;
+}
+}
+
+@media screen and (max-width: 992px){
+.modal-body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: auto;
+}
+.welcome-text{
+    margin-left: 80px;
+}
+.cbtn1, .cbtn2{
+    padding: 5px 10px 5px 10px;
+	font-size: 14px;
+}
+}
+
+@media screen and (max-width: 1200px){
+.modal-body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: auto;
+}
+}
+
+@media screen and (max-width: 1400px){
+    .hide-on-large{
+        display: none;
+    }
+}
