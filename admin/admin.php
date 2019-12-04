@@ -20,17 +20,9 @@
 <?php
     include('log-out.php');
     include('mysql_conn.php');
+    include('sidebar_menu.php');
 ?>
 
-    <div class="sidebar">
-        <a href="../index.php">Circle</a>
-        <a href="index.php">Home</a>
-        <a href="users.php">Users</a>
-        <a href="posts.php" class="active">Admin</a>
-        <a href="blog.php">Blog</a>
-        <a href="posts.php">Posts</a>
-        <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
-    </div>
     <div class="content">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Admin.." title="Type in a name">
         <table class="table" id="myTable">

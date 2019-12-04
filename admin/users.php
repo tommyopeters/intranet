@@ -13,24 +13,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Add User</title>
+    <title>Users</title>
 </head>
 <body>
 
 <?php
     include('log-out.php');
     include('mysql_conn.php');
-?>
+    include('sidebar_menu.php');
 
-    <div class="sidebar">
-        <a href="../index.php">Circle</a>
-        <a href="index.php">Home</a>
-        <a href="users.php" class="active">Users</a>
-        <a href="admin.php">Admin</a>
-        <a href="blog.php">Blog</a>
-        <a href="posts.php">Posts</a>
-        <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
-    </div>
+    $getUsers = $connection->prepare("SELECT * FROM workers");
+    $getUsers->execute();
+    $users = $getUsers->fetchAll(); 
+
+?>
     <div class="content">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for User.." title="Type in a name">
         <table class="table" id="myTable">
@@ -40,30 +36,31 @@
                 <th>Delete User</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>firstuser</td>
-                <td>IT</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
-            </tr>
-            <tr>
+            
+            <!-- <tr>
                 <td>seconduser</td>
                 <td>Accounts</td>
                 <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
                 <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
-            </tr>
-            <tr>
-                <td>firstuser</td>
-                <td>IT</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
-            </tr>
-            <tr>
-                <td>seconduser</td>
-                <td>Accounts</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
-            </tr>
+            </tr> -->
+            <?php
+                foreach ($users as $user){
+                    if($user['department']=="it"){
+                        $department = strtoupper($user['department']);
+                    }else{
+                        $department = ucwords($user['department']);
+                    }
+
+                    echo '
+                        <tr>
+                            <td>'.$user["username"].'</td>
+                            <td>'.$department.'</td>
+                            <td><button class="btn btn-responsive" onclick="deleteModal('.$user["id"].',`'.$user["username"].'`)"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
+                            <td><a href="" onclick="addAdminModal('.$user["id"].',`'.$user["username"].'`)" data-toggle="modal" data-target="#addadminmodal" class="btn btn-info btn-responsive">Add Admin</a></td>
+                        </tr>
+                        ';
+                }
+            ?>
         </table>
         <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#usermodal">Add User</a>
     </div>
@@ -113,12 +110,35 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <p class="lead modal-text">
+                <p class="lead modal-text" id="delete-user-confirm">
                     Are you sure you want to delete this User?
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-primary btn-block">Delete User</a>
+                <a href="" id="delete-user" class="btn btn-primary btn-block">Delete User</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Admin modal -->
+<div class="modal fade bs-example-modal-sm" id="addadminmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add Admin</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="lead modal-text" id="add-admin-confirm">
+                    Are you sure you want to make an admin?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="" id="add-admin" class="btn btn-primary btn-block">Make Admin</a>
             </div>
         </div>
     </div>
@@ -145,6 +165,15 @@ function myFunction() {
     }       
   }
 }
+
+function deleteModal(id, username) {
+    document.getElementById("delete-user").href = "delete_user.php?id="+id;
+    document.getElementById("delete-user-confirm").innerHTML = "Are you sure you want to delete <em>"+username+"</em>?";
+}
+function addAdminModal(id, username) {
+    document.getElementById("add-admin").href = "add_admin.php?id="+id;
+    document.getElementById("add-admin-confirm").innerHTML = "Are you sure you want to make <em>"+username+"</em> an admin?";
+}
 </script>
 
 <!-- Script links -->
@@ -152,5 +181,11 @@ function myFunction() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(function() {
+        
+    });
+</script>
 </body>
 </html>

@@ -56,7 +56,6 @@
                                 echo '<li><a href="admin/index.php">Admin</a></li>';
                             };
                         ?>
-                        
                         <li><a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a></li>
                     </ul>
                 </li>
