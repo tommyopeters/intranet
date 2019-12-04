@@ -23,8 +23,10 @@
 ?>
 
     <div class="sidebar">
+        <a href="../index.php">Circle</a>
         <a href="index.php">Home</a>
         <a href="users.php">Users</a>
+        <a href="admin.php">Admin</a>
         <a href="blog.php">Blog</a>
         <a href="posts.php" class="active">Posts</a>
         <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>

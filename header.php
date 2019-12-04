@@ -4,6 +4,7 @@
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         header('Location: login.php');
     }
+    include('mysql_conn.php');
 ?>
 <link rel="stylesheet" href="css/header.css">
 <!-- Navigation -->
@@ -47,7 +48,15 @@
                     <a class="dropdown-toggle navbar-itemm" data-toggle="dropdown" href="#"><i class="far fa-user" aria-hidden="true"></i>  <?php echo $_SESSION['username'] ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="profile.php">Profile</a></li>
-                        <!-- <li><a href="newpost.php">Add new post</a></li> -->
+                        <?php
+                            $adminsql = "SELECT * FROM admins WHERE email = :email";
+                            $adminstmt = $connection->prepare($adminsql);
+                            $adminstmt->execute(['email' => $_SESSION['email']]);
+                            if($adminstmt->rowCount() > 0){
+                                echo '<li><a href="admin/index.php">Admin</a></li>';
+                            };
+                        ?>
+                        
                         <li><a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a></li>
                     </ul>
                 </li>

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>BTM Circle</title>
+    <title>Circle Admin</title>
 </head>
 <body>
 
@@ -23,8 +23,10 @@
 ?>
 
     <div class="sidebar">
+        <a href="../index.php">Circle</a>
         <a href="index.php" class="active">Home</a>
         <a href="users.php">Users</a>
+        <a href="admin.php">Admin</a>
         <a href="blog.php">Blog</a>
         <a href="posts.php">Posts</a>
         <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
@@ -94,8 +96,8 @@
             ?>
             <form action="" method="POST" id="profile-form">
                 <div class="fgroup required">
-                    <label for="username">Name</label> <br>
-                    <input class="name" type="text" name="username" value="<?php echo $_SESSION['username'] ?>" placeholder="janedoe">
+                <label for="email">Email</label><br>
+                <input type="text" name="email" id="email" placeholder="janedoe@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                 </div>
                 <div class="fgroup required">
                     <label for="password-prev">Previous password</label> <br>

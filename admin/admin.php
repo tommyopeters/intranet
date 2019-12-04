@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="index.js"></script>
-    <link rel="stylesheet" href="css/users.css">
+    <link rel="stylesheet" href="css/admin.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Add User</title>
+    <title>Add Admin</title>
 </head>
 <body>
 
@@ -25,71 +25,57 @@
     <div class="sidebar">
         <a href="../index.php">Circle</a>
         <a href="index.php">Home</a>
-        <a href="users.php" class="active">Users</a>
-        <a href="admin.php">Admin</a>
+        <a href="users.php">Users</a>
+        <a href="posts.php" class="active">Admin</a>
         <a href="blog.php">Blog</a>
         <a href="posts.php">Posts</a>
         <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
     </div>
     <div class="content">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for User.." title="Type in a name">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Admin.." title="Type in a name">
         <table class="table" id="myTable">
             <tr class="header">
-                <th>Users</th>
-                <th>Department</th>
-                <th>Delete User</th>
-                <th></th>
+                <th>Admins</th>
+                <th>Delete Admin</th>
             </tr>
             <tr>
-                <td>firstuser</td>
-                <td>IT</td>
+                <td>firstadmin@gmail.com</td>
                 <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
             </tr>
             <tr>
-                <td>seconduser</td>
-                <td>Accounts</td>
+                <td>secondadmin@gmail.com</td>
                 <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
             </tr>
             <tr>
-                <td>firstuser</td>
-                <td>IT</td>
+                <td>firstadmin@gmail.com</td>
                 <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
             </tr>
             <tr>
-                <td>seconduser</td>
-                <td>Accounts</td>
+                <td>secondadmin@gmail.com</td>
                 <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-                <td><a href="" class="btn btn-info btn-responsive">Add Admin</a></td>
             </tr>
         </table>
-        <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#usermodal">Add User</a>
+        <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#adminmodal">Add Admin</a>
     </div>
     
 
 
 <!-- MODALS -->
-<!-- Add user modal -->
-<div class="modal fade bs-example-modal-md" id="usermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- Add admin modal -->
+<div class="modal fade bs-example-modal-md" id="adminmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Add User</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Add Admin</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form action="">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="username" required>
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" placeholder="janedoe@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                    <label for="department">Department</label>
-                    <input type="text" name="department" id="department" placeholder="department" required>
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </form>
@@ -114,11 +100,11 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <p class="lead modal-text">
-                    Are you sure you want to delete this User?
+                    Are you sure you want to delete this Admin?
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-primary btn-block">Delete User</a>
+                <a href="" class="btn btn-primary btn-block">Delete Admin</a>
             </div>
         </div>
     </div>
