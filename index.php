@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="index.js"></script>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -35,18 +35,18 @@
                 data-rotate='[ "Welcome.", "Hello.", "Greetings." ]'></span>
         </h1>
     </div>
-    <div class=" content">
+    <div class="content">
         <div class="leftcolumn">
-        <?php 
-    foreach ($posts as $post){
-        echo ' 
-            <div class="row">
-                <h2 class="padding"><a class="header" href="" data-toggle="modal" data-target="#post'.$post["id"].'">'.$post["post_title"].'</a></h2>
-                <p class="lead padding">Post description</p>
-                <a class="padding button" href="#" data-toggle="modal" data-target="#post'.$post["id"].'"><i class="material-icons">arrow_forward</i><p>Read More</p></a>
-            </div>';
-    }
-?>
+            <?php 
+            foreach ($posts as $post){
+            echo ' 
+                <div class="row">
+                    <h2 class="padding"><a class="header" href="" data-toggle="modal" data-target="#post'.$post["id"].'">'.$post["post_title"].'</a></h2>
+                    <p class="lead padding">Post description</p>
+                    <a class="padding button" href="#" data-toggle="modal" data-target="#post'.$post["id"].'"><i class="material-icons">arrow_forward</i><p>Read More</p></a>
+                </div>';
+                }
+            ?>
         </div>
         <div class="rightcolumn">
             <h1 class="header">Notice</h1>
@@ -60,7 +60,7 @@
             <div class="row">
                 <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
             </div>
-            <h4><a class="btn btn-secondary" href="">Add new</a></h4>
+            <h4><a class="btn btn-secondary btn-responsive" href="" data-toggle="modal" data-target="#addnoticemodal">ADD</a></h4>
             <div class="grid-item calender">
                     <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
                     <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
@@ -79,9 +79,9 @@
     </div> -->
 
 <!-- Notice Modal -->
-<div class="modal fade bs-example-modal-sm" id="noticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade bs-example-modal-md" id="noticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Post Title</h4>
@@ -90,9 +90,37 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <p class="lead modal-text">
-                    Post Content
-                </p>
+                <p class="lead modal-text">Post Content</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Notice -->
+<div class="modal fade bs-example-modal-md" id="addnoticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add Notice</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="postmodal">
+                    <form action="">
+                        <div class="fgroup required">
+                            <label for="title">Title</label><br>
+                            <input class="title" name="title" type="text" placeholder="A new post">
+                        </div>
+                        <div class="fgroup required">
+                            <label for="content">Content</label><br>
+                            <textarea name="content" id="content" cols="50" rows="5" placeholder="Fill me with words..."></textarea>
+                        </div>
+                        <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -127,7 +155,7 @@ aria-hidden="true">
     foreach ($posts as $post){
         echo '<div class="modal fade" id="post'.$post["id"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
-          <div class="modal-dialog modal-md" role="document">
+          <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                   <div class="modal-header text-center">
                       <h4 class="modal-title w-100 font-weight-bold">'.$post["post_title"].'</h4>
@@ -137,6 +165,7 @@ aria-hidden="true">
                   </div>
                   <div class="modal-body mx-3 grid-container">
                       <div class="mb-4 grid-item">
+                          <img class="modal-img img-responsive" src="img/collaborate.jpg" alt="" width="100%">
                           <p class="lead modal-text">'.$post["post_content"].'</p>
                       </div>
                   </div>

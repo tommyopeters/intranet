@@ -13,7 +13,7 @@ body, html{
 	font-family: 'Baskervville', serif;
 }
 * {
-	box-sizing: border-box;
+	box-sizing: border-box; 
   }
 .fgroup{
   width: 100%;

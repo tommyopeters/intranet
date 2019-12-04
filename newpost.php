@@ -7,7 +7,7 @@
 
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="newpost.css">
+    <link rel="stylesheet" href="css/newpost.css">
     <!-- <link rel="stylesheet" href="homepage.css"> -->
 
 

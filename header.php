@@ -5,7 +5,7 @@
         header('Location: login.php');
     }
 ?>
-<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="css/header.css">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light static-top">
     <div class="container">
@@ -47,7 +47,7 @@
                     <a class="dropdown-toggle navbar-itemm" data-toggle="dropdown" href="#"><i class="far fa-user" aria-hidden="true"></i>  <?php echo $_SESSION['username'] ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="newpost.php">Add new post</a></li>
+                        <!-- <li><a href="newpost.php">Add new post</a></li> -->
                         <li><a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a></li>
                     </ul>
                 </li>

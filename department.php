@@ -8,7 +8,7 @@
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="department.css">
+    <link rel="stylesheet" href="css/department.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -33,7 +33,8 @@
 <!-- Content -->
 <div class="department container" style="overflow-x:auto">
     <h1 class="text">Department Resources</h1>
-    <table>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search files.." title="Type in a name">
+    <table id="myTable">
         <?php
             if($getUploads->rowCount() < 1){
                 echo "<br> No resources at the moment <br> <br>";
@@ -133,6 +134,28 @@
         Copyright &copy; 2019 <a href="http://btmlimited.net/">BTML</a>
         </div>
 </footer>
+
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
 <!-- Script links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

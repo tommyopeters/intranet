@@ -201,6 +201,26 @@ padding: 20px;
 /* font-size: 30px; */
 /* text-align: center; */
 }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #aaa;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(65, 64, 64); 
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888; 
+  }
+
+
 footer{
     background: #333;
 }

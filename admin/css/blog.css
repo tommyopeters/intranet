@@ -51,39 +51,83 @@ body{
     background-color: #555;
     color: white;
   }
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  .fgroup{
     width: 100%;
+    margin-bottom: 5px;
+  }
+  .fgroup.required label:after{
+    content: ' *';
+    color: rgb(205, 44, 44);
+  }
+ .postmodal .title{
+    width: 50%;
+    margin-bottom: 10px;
+}
+.postmodal textarea{
+    width: 100%;
+}
+.postmodal .header{
+    font-size: 35px;
+}
+.postmodal label{
+    font-size: 18px;
+}
+.postmodal .title, textarea{
+    border: 1px solid rgb(216, 215, 215);
+}
+.postmodal button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 15%;
+}
+.postmodal form{
+    border: none;
+}
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table tr.header, table tr:hover{
+    background-color: rgb(235, 220, 220);
+}
+.content .btn a{
+    color: white;
+    text-decoration: none;
+}
+.content table .btn i{
+  transition: 0.3s;
+  color: black;
+}
+.content table .btn i:hover{
+  color: #aaa;
+  transition: 0.3s;
+}
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 20px;
     border: 1px solid #ddd;
     margin-top: 20px;
   }
-  
-  th, td {
-    text-align: left;
-    padding: 16px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  .content .btn a{
-      color: white;
-      text-decoration: none;
-  }
-  .modal-body input{
-      width: 100%;
-      border: 1px solid #aaa;
-      padding: 5px;
-      opacity: 0.7;
-      border-radius: 10px;
-      margin-bottom: 5px;
-  }
-
 
 
 
@@ -166,10 +210,6 @@ body{
   .sidebar a {
     float: left;
   }
-  div.content {
-      margin-left: 0;
-      /* margin-top: 30px; */
-    }
 }
 
 @media screen and (max-width: 400px) {

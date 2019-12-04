@@ -7,7 +7,7 @@
 
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="css/profile.css">
     <!-- <link rel="stylesheet" href="homepage.css"> -->
 
 
@@ -18,7 +18,7 @@
         session_start();
         include("mysql_conn.php");
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-            header('Location: login.php');
+            header('Location: login.php'); 
         }
 
         //FORM SUBMISSION INPUTS CHECK
@@ -893,7 +893,7 @@ aria-hidden="true">
         </div>
     </div>
 </div>
-
+ 
 
 
 <!-- Script links -->

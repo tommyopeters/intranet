@@ -14,7 +14,7 @@
 //     echo "Connection failed: " . $e->getMessage();
 //     }
 
-$host = "localhost"; 
+$host = "localhost";
 $dbuser = "root";
 $dbpassword = "root";
 $dbname = 'login_system';

@@ -7,9 +7,9 @@
 
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css">
 
-    <title>BTM Circle</title>
+    <title>LOGIN</title>
 </head>
 <body>
     <div class="bg-image">

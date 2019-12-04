@@ -7,7 +7,7 @@
 
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="css/blog.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>Blog</title>

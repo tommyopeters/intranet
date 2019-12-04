@@ -17,7 +17,7 @@ body, html{
   }
   
 .bg-image {
-background-image: url("img/logo.png");
+background-image: url("../img/logo.png");
 filter: blur(8px);
 -webkit-filter: blur(8px);
 height: 70%; 
@@ -165,7 +165,23 @@ padding: 20px;
   color: rgb(205, 44, 44);
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
 
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
 
 
 @media screen and (max-width: 568px){
@@ -173,6 +189,23 @@ padding: 20px;
     width: 600px;
     /* margin: 200px; */
   }
+  /* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
   }
   
   @media screen and (max-width: 580px){
@@ -180,6 +213,23 @@ padding: 20px;
       width: 600px;
       /* margin: 200px; */
     }
+    /* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
   }
   
   @media screen and (max-width: 600px){

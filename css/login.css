@@ -17,7 +17,7 @@ body, html{
   }
   
 .bg-image {
-background-image: url("img/logo.png");
+background-image: url("../img/logo.png");
 filter: blur(8px);
 -webkit-filter: blur(8px);
 height: 70%; 
