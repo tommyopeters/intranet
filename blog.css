@@ -64,9 +64,13 @@ nav .navbar{
     /* border: 1px solid #000; */
     font-size: 35px;
     margin-top: 20px;
+    width: 100%;
+}
+.content .row .lead{
+    width: 100%;
 }
 .content .row p{
-    color: rgb(139, 139, 139)
+    color: rgb(139, 139, 139);
 }
 .content .row a{
     text-decoration: none;
@@ -110,7 +114,7 @@ nav .navbar{
     margin-top: 20px;
     margin-bottom: 20px;
     /* border: 1px solid #000; */
-    padding: 5px 20px 0px 20px;
+    padding: 2px 20px 0px 20px;
     border-radius: 20px;
     opacity: 0.6;
 	transition: 0.3s;
@@ -122,6 +126,12 @@ nav .navbar{
     color: black;
 	background-color: var(--primary-color-hover);
 }
+.content .row .button p{
+    /* border: 1px solid black; */
+    float: right;
+    font-size: 17px;
+    padding-top: 5px;
+}
 .content .row p{
     float: right;
     font-size: 18px;
@@ -131,7 +141,8 @@ nav .navbar{
     font-size: 16px;
 }
 .content .row .button i{
-   color: rgb(139, 139, 139); 
+    font-size: 18px;
+    color: rgb(139, 139, 139); 
 }
 .content .row i{
     margin: 2px;
@@ -139,14 +150,16 @@ nav .navbar{
 .info a{
     font-size: 15px;
 }
-.modal-text{
-    float: right;
+.modal-text::first-letter {
+    font-size: 200%;
+}
+.modal-img{
+    width: 70%;
+    position:relative;
+    left:18%;
 }
 .mb-4, .mb-5{
     border: none;
-}
-.two dd{
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
 }
 .grid-container:nth-of-type(2) {
     display: grid;
@@ -254,6 +267,9 @@ hr{
     footer .col2{
         padding-left: 0px;
     }
+    .content .row li{
+        display: grid;
+    }
     }
     
     @media screen and (max-width: 580px){
@@ -261,6 +277,9 @@ hr{
         display: grid;
         grid-gap: 0px;
         grid-template-columns: auto;
+    }
+    .content .row ul{
+        display: grid;
     }
     }
     

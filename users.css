@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+:root{
+	--primary-color: #b50415;
+	--primary-color-hover: #d3071b;
+	--secondary-color: #103063;
+	--secondary-color-hover: #143f85;
+	--primary-color: #b50415;
+	--light-color: rgb(244, 244, 244);
+}
+body{
+    font-family: 'Baskervville', serif;
+}
+#welcome span{
+    background-color: #222;
+    width: 100%;
+}
+  #welcome h1 {
+    /* color: #888; */
+    font-size: 70px;
+    padding: 2%;
+    background-color: #222;
+  color: #aaa;
+  font-weight: 600;
+  height: 150px;
+    /* margin: 0.4em 0; */
+    text-align: center;
+  }
+  .sidebar {
+    margin: 0;
+    padding-top: 10%;
+    width: 200px;
+    background-color: #aaa;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    background-color: #222;
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .content .btn a{
+      color: white;
+      text-decoration: none;
+  }
+  .modal-body input{
+      width: 100%;
+      border: 1px solid #aaa;
+      padding: 5px;
+      opacity: 0.7;
+      border-radius: 10px;
+      margin-bottom: 5px;
+  }
+
+
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 568px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+  
+@media screen and (max-width: 580px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+  
+@media screen and (max-width: 600px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+  
+@media screen and (max-width: 780px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+  
+@media screen and (max-width: 992px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 2%;
+  } */
+}
+  
+@media screen and (max-width: 1200px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+@media screen and (max-width: 1000px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+@media screen and (max-width: 1400px){
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 15%;
+  } */
+}
+@media screen and (max-width: 800px) {
+  /* .sidebar {
+    padding-top: 5%;
+    position: fixed;
+    top: 21%;
+  } */
+}
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 0px;
+}
+  .sidebar a {
+    float: left;
+  }
+  div.content {
+      margin-left: 0;
+      /* margin-top: 30px; */
+    }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}

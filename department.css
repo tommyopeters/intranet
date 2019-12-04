@@ -140,9 +140,7 @@ nav .navbar{
 table{
     /* border: 1px solid black; */
     width: 100%;
-}
-#myDIV2{
-    display: none;
+    border-bottom: 1px solid #000;
 }
 .td2{
     /* border: 1px solid black; */
@@ -153,13 +151,22 @@ table button{
     border: none;
     background-color: #fff;
 }
+
 .department{
-    border: 1px solid rgb(204, 203, 203);
+    /* border: 1px solid rgb(204, 203, 203); */
     /* border-radius: 20px; */
     padding: 20px;
 }
+.department form{
+    /* border: 1px solid rgb(204, 203, 203); */
+    padding: 0px 0px 10px 10px;
+    background-color: rgb(253, 251, 251);
+}
 .department .text{
     font-size: 25px;
+    background: #222;
+    color: #aaa;
+    padding: 8px;
 }
 .department hr{
     margin-bottom: 10px;
@@ -261,7 +268,7 @@ table button{
 	background-color: var(--primary-color-hover);
 }
 .content .row p{
-    /* float: right; */
+    /* float: right; */ 
     font-size: 18px;
     margin-bottom: 0px;
 }

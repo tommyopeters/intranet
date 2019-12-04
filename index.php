@@ -8,8 +8,10 @@
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="homepage.css">
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>BTM Circle</title>
 </head>
@@ -24,30 +26,81 @@
     ?>
 
     <!-- Header -->
-    <div class="welcome">
+
+    <div id="welcome">
+        <h1><i class="fa fa-smile-o"></i>
+            <span
+                class="txt-rotate"
+                data-period="2000"
+                data-rotate='[ "Welcome.", "Hello.", "Greetings." ]'></span>
+        </h1>
+    </div>
+    <div class=" content">
+        <div class="leftcolumn">
+        <?php 
+    foreach ($posts as $post){
+        echo ' 
+            <div class="row">
+                <h2 class="padding"><a class="header" href="" data-toggle="modal" data-target="#post'.$post["id"].'">'.$post["post_title"].'</a></h2>
+                <p class="lead padding">Post description</p>
+                <a class="padding button" href="#" data-toggle="modal" data-target="#post'.$post["id"].'"><i class="material-icons">arrow_forward</i><p>Read More</p></a>
+            </div>';
+    }
+?>
+        </div>
+        <div class="rightcolumn">
+            <h1 class="header">Notice</h1>
+            <!-- <div id="noticeboard" class="grid-item"><script src="https://widgets.remind.com/iframe.js?token=fc34a9d0d860013729520242ac110003&height=400&join=false"></script></div> -->
+            <div class="row">
+                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
+            </div>
+            <div class="row">
+                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
+            </div>
+            <div class="row">
+                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
+            </div>
+            <h4><a class="btn btn-secondary" href="">Add new</a></h4>
+            <div class="grid-item calender">
+                    <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
+                    <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
+                <h4><a class="cbtn1" href="calender.php">Show Full Calender</a></h4>
+                <h4><a class="cbtn2" href="https://tockify.com/tkf2/submitEvent/312050c0b844454e8d0ed4327c5e8246" target="_blank">Submit an Event</a></h4>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="welcome">
         <div class="welcome-text">
             <h1>Welcome to the Circle.</h1>
             <div class="input-group buttonInside hide-on-small">
                 <input id="email" type="text" class="form-control" name="search" placeholder="Search">
-                <button id="searchbutton"><i class="material-icons">search</i></button>   
             </div>
-            <!-- <p class="lead hide-on-small">Quick Navigation</p>
-            <button class="welcomebutton btn1 hide-on-small hide"><a href="#noticeboard">Notice Board</a></button>
-            <button class="welcomebutton btn2 hide-on-small"><a href="#" data-toggle="modal" data-target="#modalcontact">Contact</a></button>
-            <button class="welcomebutton btn3"><a href="blog.html">Go to Blog</a></button> -->
-            <!-- <button class="welcomebutton btn3 hide-on-large"><a href="blog.html">Go to Blog</a></button> -->
+        </div>
+    </div> -->
+
+<!-- Notice Modal -->
+<div class="modal fade bs-example-modal-sm" id="noticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Post Title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="lead modal-text">
+                    Post Content
+                </p>
+            </div>
         </div>
     </div>
-
+</div>
 
 <!-- Content -->
 <div class="grid-container container grid1">
-    <div class="grid-item calender">
-            <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
-            <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
-        <h3><a class="cbtn1" href="calender.html">Show Full Calender</a>
-        <a class="cbtn2" href="https://tockify.com/tkf2/submitEvent/312050c0b844454e8d0ed4327c5e8246" target="_blank">Submit an Event</a></h3>
-    </div>
+    
     <!-- <div class="grid-item">
         
     </div> -->
@@ -64,31 +117,17 @@
             <dd>4:00pm Tuesday</dd>
         </dl>
     </div> -->
-    <div id="noticeboard" class="grid-item"><script src="https://widgets.remind.com/iframe.js?token=fc34a9d0d860013729520242ac110003&height=400&join=false"></script></div>
+
 </div>
 
 <!-- Cards -->
 <div class="container carddeck">
     <div class="card-deck">
-        <?php 
-            foreach ($posts as $post){
-                echo ' <div class="card">
-                <img src="img/collaborate.jpg" alt="Avatar" style="width:100%">
-                <div class="container cardtext">
-                    <a href="" data-toggle="modal" data-target=#post'.$post["id"].'"><h4>'.$post["post_title"].'</h4></a>
-                </div>
-            </div>';
-            }
-        ?>
-    </div>
-</div>
-
-  
 <?php 
     foreach ($posts as $post){
         echo '<div class="modal fade" id="post'.$post["id"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
-          <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-dialog modal-md" role="document">
               <div class="modal-content">
                   <div class="modal-header text-center">
                       <h4 class="modal-title w-100 font-weight-bold">'.$post["post_title"].'</h4>
@@ -98,7 +137,6 @@
                   </div>
                   <div class="modal-body mx-3 grid-container">
                       <div class="mb-4 grid-item">
-                        <img src="img/collaborate.jpg" alt="" width="100%">
                           <p class="lead modal-text">'.$post["post_content"].'</p>
                       </div>
                   </div>
@@ -107,6 +145,8 @@
       </div>';
     }
 ?>
+    </div>
+</div>
 
 
 

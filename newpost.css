@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+:root{
+	--primary-color: #b50415;
+	--primary-color-hover: #d3071b;
+	--secondary-color: #103063;
+	--secondary-color-hover: #143f85;
+	--primary-color: #b50415;
+	--light-color: #f4f4f4;
+}
+body, html{
+	height: 100%;
+	margin: 0px;
+	font-family: 'Baskervville', serif;
+}
+* {
+	box-sizing: border-box;
+  }
+.fgroup{
+  width: 100%;
+  margin-bottom: 5px;
+}
+.fgroup.required label:after{
+  content: ' *';
+  color: rgb(205, 44, 44);
+}
+.main{
+    width: 70%;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* border: 1px solid rgb(204, 203, 203); */
+    position: relative;
+    top: 6%;
+    padding: 20px 30px;
+}
+.title{
+    width: 50%;
+    margin-bottom: 10px;
+}
+textarea{
+    width: 100%;
+}
+.header{
+    font-size: 35px;
+}
+label{
+    font-size: 18px;
+}
+.title, textarea{
+    border: 1px solid rgb(216, 215, 215);
+}
+button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 15%;
+}
+
+
+@media screen and (max-width: 568px){
+  button{
+    width: 30%;
+}
+  }
+  
+  @media screen and (max-width: 580px){
+    button{
+        width: 30%;
+    }
+  }
+  
+  @media screen and (max-width: 780px){
+    button{
+        width: 30%;
+    }
+  }
+  
+  @media screen and (max-width: 992px){
+  
+  }
+  
+  @media screen and (max-width: 1200px){
+  
+  }
+  
+  @media screen and (max-width: 1400px){
+     
+  }

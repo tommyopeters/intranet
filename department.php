@@ -33,7 +33,6 @@
 <!-- Content -->
 <div class="department container" style="overflow-x:auto">
     <h1 class="text">Department Resources</h1>
-    <hr>
     <table>
         <?php
             if($getUploads->rowCount() < 1){
@@ -51,7 +50,7 @@
     </table>
     <form action="upload.php" method="post" enctype="multipart/form-data">
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input class="btn-secondary btn" type="submit" name="submit" value="Upload File">
+        <input class="btn-secondary btn-sm btn" type="submit" name="submit" value="Upload File">
     </form>
     <?php
     if (strpos($current_url, "error=file_exists")){
@@ -76,54 +75,21 @@
 </div>
 
 
-<div class="content grid-container grid1 container">
-    <div class="grid-item">
-        <h1>Info</h1>
-        <ul>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-        </ul>
-    </div>
+<!-- <div class="content grid-container grid1 container">
     <div class="grid-item calender">
         <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
         <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
-        <h3><a class="cbtn1" href="calender.php">Show Full Calender</a>
-        <a class="cbtn2" href="https://tockify.com/tkf2/submitEvent/312050c0b844454e8d0ed4327c5e8246" target="_blank">Submit an Event</a></h3>
-    </div>
-</div>
-
-<!-- Cards
-<div class="container carddeck">
-    <div class="card-deck">
-        <div class="card">
-            <img src="img/collaborate.jpg" alt="Avatar" style="width:100%">
-            <div class="container cardtext">
-                <a href="" data-toggle="modal" data-target="#modalblog1"><h4>How to Collaborate Effectively</h4></a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="img/celebrate.jpg" alt="Avatar" style="width:100%">
-            <div class="container cardtext">
-                <a href="" data-toggle="modal" data-target="#modalblog2"><h4>12 Reasons to Celebrate in the Office</h4></a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="img/beautify.jpg" alt="Avatar" style="width:100%">
-            <div class="container cardtext">
-                <a href="" data-toggle="modal" data-target="#modalblog3"><h4>5 Ways to Beautify your Workspace</h4></a>
-            </div>
-        </div>
+        <h3><a class="btn btn-sm btn-secondary" href="calender.php">Show Full Calender</a>
+        <a class="btn btn-sm btn-secondary" href="https://tockify.com/tkf2/submitEvent/312050c0b844454e8d0ed4327c5e8246" target="_blank">Submit an Event</a></h3>
     </div>
 </div> -->
 
+<!-- Department info modal-->
 <?php 
     foreach ($posts as $post){
         echo '<div class="modal fade" id="post'.$post["id"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
-          <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-dialog modal-md" role="document">
               <div class="modal-content">
                   <div class="modal-header text-center">
                       <h4 class="modal-title w-100 font-weight-bold">'.$post["post_title"].'</h4>
@@ -141,38 +107,6 @@
       </div>';
     }
 ?>
-
-
-<!-- Department info modal-->
-<div class="modal fade" id="modalblog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">How to Collaborate Effectively</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-3 grid-container">
-                <div class="mb-5 grid-item">
-                    <img class="modal-img" src="img/collaborate.jpg" alt="" width="100%">
-                </div>
-                <div class="mb-4 grid-item">
-                    <p class="lead modal-text">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque harum rem ut sit dolor voluptatum eligendi veniam cum officia, 
-                        consequuntur nam ipsum mollitia laborum ratione corrupti iusto ea consectetur soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Tempora, placeat delectus in dolor mollitia a magni animi cum, ipsa nulla minus eligendi ut deleniti rerum debitis quibusdam ab distinctio quia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, sapiente nostrum minima perspiciatis dolorum placeat voluptatum, aliquid 
-                        in ipsum hic labore? Voluptas quisquam nulla qui quaerat neque odit pariatur excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Quam quo temporibus, non ullam atque dolore animi aliquid quasi quidem quisquam corporis ducimus rerum officia voluptate error modi enim perspiciatis ipsam? 
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Footer -->
 <footer>
@@ -199,8 +133,6 @@
         Copyright &copy; 2019 <a href="http://btmlimited.net/">BTML</a>
         </div>
 </footer>
-
-
 
 <!-- Script links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

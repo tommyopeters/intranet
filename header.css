@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+:root{
+	--primary-color: #b50415;
+	--primary-color-hover: #d3071b;
+	--secondary-color: #103063;
+	--secondary-color-hover: #143f85;
+	--primary-color: #b50415;
+	--light-color: rgb(244, 244, 244);
+}
+body{
+    font-family: 'Baskervville', serif;
+}
+nav .navbar{
+    background-color: #fff;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.navbar .navbar-brand img{
+    width: 40%;
+}
+.navbar-item{
+    margin-right: 40px;
+    color: black;
+    text-decoration: none;
+}
+.navbar-itemm{
+    margin-right: 0px;
+    color: black;
+    text-decoration: none;
+}
+.navbar li a{
+    color: black;
+    font-size: 20px;
+    transition: 0.3s;
+    margin-bottom: 2px;
+}
+.navbar li a:hover{
+    text-decoration: none;
+    opacity: 0.4;
+}
+.navbar-toggler-icon{
+    color: black;
+}
+.dropdown-menu{
+    padding: 10px 10px 10px 3px;
+    border: none;
+    border-bottom: 2px solid rgb(29, 29, 29);
+    border-top: 1px solid rgb(228, 226, 226);
+    border-right: 1px solid rgb(228, 226, 226);
+    border-left: 1px solid rgb(228, 226, 226);
+
+}
+/* .dropdown-menu li a{
+    border-bottom: 1px solid rgb(228, 226, 226);
+} */

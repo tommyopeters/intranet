@@ -18,8 +18,7 @@
     <div class="bg-text">
       <h1>Welcome to BTM Circle.</h1>
 
-      <?php
-
+<?php
 include('mysql_conn.php');
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
     $email = $_POST['email'];
