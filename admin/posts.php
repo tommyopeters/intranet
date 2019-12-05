@@ -190,6 +190,7 @@ aria-hidden="true">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
                         </div>
+                        
                         <div class="fgroup required">
                             <label for="content">Post Content</label><br>
                             <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
@@ -206,6 +207,10 @@ aria-hidden="true">
                                 <option value="hr">HR</option>
                                 <option value="executives">Executives</option>
                             </select>
+                        </div> <br>
+                        <div class="fgroup">
+                            <label for="fileToUpload">New Post Image: </label>
+                            <input type="file" name="fileToUpload" id="fileToUpload">
                         </div>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">Edit</button>
                     </form>

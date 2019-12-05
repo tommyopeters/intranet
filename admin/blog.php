@@ -21,6 +21,10 @@
     include('log-out.php');
     include('mysql_conn.php');
     include('sidebar_menu.php');
+
+    $getPosts = $connection->prepare("SELECT * FROM posts");
+    $getPosts->execute();
+    $posts = $getPosts->fetchAll(); 
 ?>
 
     <div class="content">
@@ -28,39 +32,22 @@
         <table class="table" id="myTable">
             <tr class="header">
                 <th>Blog Posts</th>
-                <th>Department</th>
                 <th>Date Posted</th>
                 <th>Edit Post</th>
                 <th>Delete Post</th>
             </tr>
-            <tr>
-                <td>Post 1</td>
-                <td>IT</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 2</td>
-                <td>Accounts</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 3</td>
-                <td>IT</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 4</td>
-                <td>Accounts</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
+            <?php 
+                foreach ($posts as $post){
+                    echo '
+                        <tr>
+                            <td>'.$post["post_title"].'</td>
+                            <td>'.date( 'd-m-Y', strtotime($post["post_date"]) ).'</td>
+                            <td><button class="btn btn-responsive" onclick="editPostModal('.$post['id'].')"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class="far fa-edit"></i></a></button></td>
+                            <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
+                        </tr>
+                        ';
+                }
+            ?>
         </table>
         <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#postmodal">Add Post</a>
     </div>
@@ -94,7 +81,6 @@ aria-hidden="true">
                         <form action="" method="post" enctype="multipart/form-data">
                             <label for="image">Upload an image</label><br>
                             <input type="file" name="fileToUpload" id="fileToUpload">
-                            <input class="btn-secondary btn-sm btn" type="submit" name="submit" value="Upload">
                         </form>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
                     </form>
@@ -117,7 +103,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="">
+                    <form action="functions/add_post.php" method="POST">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -185,7 +171,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="">
+                    <form action="functions/edit_post.php" id="edit-post-form" method="POST">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -194,18 +180,9 @@ aria-hidden="true">
                             <label for="content">Post Content</label><br>
                             <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
                         </div>
-                        <div class="fgroup required">
-                            <label for="department">Department</label><br>
-                            <select name="department" id="department">
-                                <option value="<?php echo $_SESSION['department']; ?>" default>Select Department</option>
-                                <option value="front-desk">Front Desk</option>
-                                <option value="it">IT</option>
-                                <option value="operations">Operations</option>
-                                <option value="accounts">Accounts</option>
-                                <option value="sales-and-marketing">Sales & Marketing</option>
-                                <option value="hr">HR</option>
-                                <option value="executives">Executives</option>
-                            </select>
+                        <div class="fgroup">
+                            <label for="fileToUpload">New Post Image: </label>
+                            <input type="file" name="fileToUpload" id="fileToUpload">
                         </div>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">Edit</button>
                     </form>
@@ -237,6 +214,38 @@ function myFunction() {
     }       
   }
 }
+
+<?php 
+    $index = 0;
+    echo 'let posts = [';
+    foreach ($posts as $post){
+        if($index == 0){
+            echo '{';
+            $index++;
+        }else{
+            echo ',{';
+        }
+        echo 'id:'.$post['id'].', ';
+        echo 'title: `'.$post['post_title'].'`, ';
+        echo 'content: `'.$post['post_content'].'`, ';
+        echo '}';
+    }
+    echo '];';
+?>
+
+function editPostModal(id){
+    let post = posts.filter(post => {
+        if(post.id == id){
+            return true;
+        }
+    })[0]
+    let form = document.getElementById('edit-post-form');
+    form.title.value = post.title
+    form.content.value = post.content
+
+}
+
+
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

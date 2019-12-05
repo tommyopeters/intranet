@@ -47,6 +47,8 @@
                 foreach ($users as $user){
                     if($user['department']=="it"){
                         $department = strtoupper($user['department']);
+                    }else if($user['department']=="sales-and-marketing"){
+                        $department = "Sales & Marketing";
                     }else{
                         $department = ucwords($user['department']);
                     }
