@@ -16,7 +16,7 @@
 
 $host = "localhost"; 
 $dbuser = "root";
-$dbpassword = "";
+$dbpassword = "root";
 $dbname = 'login_system';
 
 //dsn -data source name

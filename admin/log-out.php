@@ -2,7 +2,7 @@
 <?php 
     session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-        header('Location: login.php');
+        header('Location: ../login.php');
     }
 ?>
 
@@ -24,7 +24,7 @@ aria-hidden="true">
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="logout.php" class="btn btn-primary btn-block">LOG OUT</a>
+                <a href="../logout.php" class="btn btn-primary btn-block">LOG OUT</a>
             </div>
         </div>
     </div>

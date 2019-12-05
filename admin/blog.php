@@ -43,7 +43,7 @@
                             <td>'.$post["post_title"].'</td>
                             <td>'.date( 'd-m-Y', strtotime($post["post_date"]) ).'</td>
                             <td><button class="btn btn-responsive" onclick="editPostModal('.$post['id'].')"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class="far fa-edit"></i></a></button></td>
-                            <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
+                            <td><button class="btn btn-responsive" onclick="deletePostModal('.$post['id'].')"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
                         </tr>
                         ';
                 }
@@ -69,7 +69,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="">
+                    <form action="functions/add_post.php" method="POST" enctype="multipart/form-data">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -78,10 +78,10 @@ aria-hidden="true">
                             <label for="content">Post Content</label><br>
                             <textarea name="content" id="content" cols="90" rows="10" placeholder="Fill me with words..."></textarea>
                         </div>
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <div class="fgroup required">
                             <label for="image">Upload an image</label><br>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
-                        </form>
+                            <input type="file" name="fileToUpload" id="fileToUpload1">
+                        </div>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
                     </form>
                 </div>
@@ -90,48 +90,7 @@ aria-hidden="true">
     </div>
 </div>
 
-<!-- Add Departmental Post -->
-<div class="modal fade bs-example-modal-lg" id="depmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Add Departmental Post</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="postmodal">
-                    <form action="functions/add_post.php" method="POST">
-                        <div class="fgroup required">
-                            <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
-                        </div>
-                        <div class="fgroup required">
-                            <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
-                        </div>
-                        <div class="fgroup required">
-                            <label for="department">Department</label><br>
-                            <select name="department" id="department">
-                                <option value="<?php echo $_SESSION['department']; ?>" default>Select Department</option>
-                                <option value="front-desk">Front Desk</option>
-                                <option value="it">IT</option>
-                                <option value="operations">Operations</option>
-                                <option value="accounts">Accounts</option>
-                                <option value="sales-and-marketing">Sales & Marketing</option>
-                                <option value="hr">HR</option>
-                                <option value="executives">Executives</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Delete modal -->
 <div class="modal fade bs-example-modal-sm" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -150,7 +109,7 @@ aria-hidden="true">
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-primary btn-block">Delete Post</a>
+                <a href="" id="delete-post" class="btn btn-primary btn-block">Delete Post</a>
             </div>
         </div>
     </div>
@@ -171,7 +130,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="functions/edit_post.php" id="edit-post-form" method="POST">
+                    <form action="" id="edit-post-form" method="POST" enctype="multipart/form-data">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -182,7 +141,7 @@ aria-hidden="true">
                         </div>
                         <div class="fgroup">
                             <label for="fileToUpload">New Post Image: </label>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="file" name="fileToUpload" id="fileToUpload2">
                         </div>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">Edit</button>
                     </form>
@@ -242,7 +201,12 @@ function editPostModal(id){
     let form = document.getElementById('edit-post-form');
     form.title.value = post.title
     form.content.value = post.content
+    form.action = "functions/edit_post.php?id="+post.id;
+}
 
+function deletePostModal(id){
+    let deleteButton = document.getElementById('delete-post');
+    deleteButton.href = "functions/delete_post.php?id="+id;
 }
 
 

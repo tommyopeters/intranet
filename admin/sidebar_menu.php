@@ -11,5 +11,5 @@
     <a href="admin.php" <?php if($page == 'admin.php'){ echo 'class="active"';} ?>>Admin</a>
     <a href="blog.php" <?php if($page == 'blog.php'){ echo 'class="active"';} ?>>Blog</a>
     <a href="posts.php" <?php if($page == 'posts.php'){ echo 'class="active"';} ?>>Posts</a>
-    <a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
+    <a href="../logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a>
 </div>

@@ -3,7 +3,6 @@ session_start();
 $user_id = $_SESSION['user_id'];
 $department = $_SESSION['department'];
 if (!file_exists("uploads/")) {
-  echo "doesn't exist";
   mkdir("uploads/");
 }
 $target_dir = "uploads/".$department."/";

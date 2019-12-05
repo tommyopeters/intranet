@@ -21,6 +21,10 @@
     include('log-out.php');
     include('mysql_conn.php');
     include('sidebar_menu.php');
+
+    $getPosts = $connection->prepare("SELECT * FROM department_posts");
+    $getPosts->execute();
+    $posts = $getPosts->fetchAll(); 
 ?>
 
     <div class="content">
@@ -33,76 +37,32 @@
                 <th>Edit Post</th>
                 <th>Delete Post</th>
             </tr>
-            <tr>
-                <td>Post 1</td>
-                <td>IT</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 2</td>
-                <td>Accounts</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 3</td>
-                <td>IT</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>Post 4</td>
-                <td>Accounts</td>
-                <td>2019-12-03</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class='far fa-edit'></i></a></button></td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
+            <?php 
+                foreach ($posts as $post){
+                    if($post['department']=="it"){
+                        $department = strtoupper($post['department']);
+                    }else if($post['department']=="sales-and-marketing"){
+                        $department = "Sales & Marketing";
+                    }else{
+                        $department = ucwords($post['department']);
+                    }
+                    echo '
+                        <tr>
+                            <td>'.$post["post_title"].'</td>
+                            <td>'.$department.'</td>
+                            <td>'.date( 'd-m-Y', strtotime($post["post_date"]) ).'</td>
+                            <td><button class="btn btn-responsive" onclick="editPostModal('.$post['id'].')"><a href="" data-toggle="modal" data-target="#editdepmodal"><i class="far fa-edit"></i></a></button></td>
+                            <td><button class="btn btn-responsive" onclick="deletePostModal('.$post['id'].')"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
+                        </tr>
+                        ';
+                }
+            ?>
         </table>
         <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#depmodal">Add Post</a>
     </div>
     
 
 
-
-
-<!-- Add post modal -->
-<div class="modal fade bs-example-modal-lg" id="postmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Add Blog Post</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="postmodal">
-                    <form action="">
-                        <div class="fgroup required">
-                            <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
-                        </div>
-                        <div class="fgroup required">
-                            <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="10" placeholder="Fill me with words..."></textarea>
-                        </div>
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <label for="image">Upload an image</label><br>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
-                            <input class="btn-secondary btn-sm btn" type="submit" name="submit" value="Upload">
-                        </form>
-                        <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Add Departmental Post -->
 <div class="modal fade bs-example-modal-md" id="depmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -117,7 +77,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="">
+                    <form action="functions/add_department_post.php" method="POST" >
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -164,7 +124,7 @@ aria-hidden="true">
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-primary btn-block">Delete Post</a>
+                <a href="" id="delete-post" class="btn btn-primary btn-block">Delete Post</a>
             </div>
         </div>
     </div>
@@ -185,7 +145,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div class="postmodal">
-                    <form action="">
+                    <form action="" id="edit-post-form" method="POST">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
                             <input class="title" name="title" type="text" placeholder="A new post">
@@ -195,10 +155,10 @@ aria-hidden="true">
                             <label for="content">Post Content</label><br>
                             <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
                         </div>
-                        <div class="fgroup required">
+                        <div class="fgroup">
                             <label for="department">Department</label><br>
                             <select name="department" id="department">
-                                <option value="<?php echo $_SESSION['department']; ?>" default>Select Department</option>
+                                <option value="<?php echo $post['department']; ?>" default>Select Department</option>
                                 <option value="front-desk">Front Desk</option>
                                 <option value="it">IT</option>
                                 <option value="operations">Operations</option>
@@ -207,11 +167,7 @@ aria-hidden="true">
                                 <option value="hr">HR</option>
                                 <option value="executives">Executives</option>
                             </select>
-                        </div> <br>
-                        <div class="fgroup">
-                            <label for="fileToUpload">New Post Image: </label>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
-                        </div>
+                        </div> 
                         <button class="btn btn-block btn-info btn-responsive" type="submit">Edit</button>
                     </form>
                 </div>
@@ -240,6 +196,44 @@ function myFunction() {
     }       
   }
 }
+
+
+<?php 
+    $index = 0;
+    echo 'let posts = [';
+    foreach ($posts as $post){
+        if($index == 0){
+            echo '{';
+            $index++;
+        }else{
+            echo ',{';
+        }
+        echo 'id:'.$post['id'].', ';
+        echo 'title: `'.$post['post_title'].'`, ';
+        echo 'content: `'.$post['post_content'].'`, ';
+        echo 'department: `'.$post['department'].'`, ';
+        echo '}';
+    }
+    echo '];';
+?>
+
+function editPostModal(id){
+    let post = posts.filter(post => {
+        if(post.id == id){
+            return true;
+        }
+    })[0]
+    let form = document.getElementById('edit-post-form');
+    form.title.value = post.title
+    form.content.value = post.content
+    form.action = "functions/edit_department_post.php?id="+post.id;
+}
+
+function deletePostModal(id){
+    let deleteButton = document.getElementById('delete-post');
+    deleteButton.href = "functions/delete_department_post.php?id="+id;
+}
+
 </script>
 
 <!-- Script links -->
