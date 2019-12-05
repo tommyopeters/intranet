@@ -50,8 +50,8 @@
                     }else{
                         $department = ucwords($user['department']);
                     }
-
-                    echo '
+                    if ($user['username'] !== $_SESSION['username']){
+                        echo '
                         <tr>
                             <td>'.$user["username"].'</td>
                             <td>'.$department.'</td>
@@ -59,6 +59,8 @@
                             <td><a href="" onclick="addAdminModal('.$user["id"].',`'.$user["username"].'`)" data-toggle="modal" data-target="#addadminmodal" class="btn btn-info btn-responsive">Add Admin</a></td>
                         </tr>
                         ';
+                    }
+                    
                 }
             ?>
         </table>
@@ -80,19 +82,32 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <form action="">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="username" required>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="janedoe@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                    <label for="department">Department</label>
-                    <input type="text" name="department" id="department" placeholder="department" required>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="******" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <form id="add-user-form" action="functions/add_user.php" method="POST">
+                    <div class="form-group required">
+                        <label for="username">Name</label>
+                        <input type="text" name="username" id="username" placeholder="name" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" placeholder="janedoe@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="department">Department</label> <br>
+                        <select name="department" id="department">
+                            <option value="" default>Select Department</option>
+                            <option value="front-desk">Front Desk</option>
+                            <option value="it">IT</option>
+                            <option value="operations">Operations</option>
+                            <option value="accounts">Accounts</option>
+                            <option value="sales-and-marketing">Sales & Marketing</option>
+                            <option value="hr">HR</option>
+                            <option value="executives">Executives</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="logout.php" class="btn btn-info btn-responsive btn-block">ADD</a>
+                <a href="" id="add-user-button" onclick="formCheck(event)" class="btn btn-info btn-responsive btn-block">ADD</a>
             </div>
         </div>
     </div>
@@ -147,33 +162,41 @@ aria-hidden="true">
 
 
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }       
+    }
+    }
 
-function deleteModal(id, username) {
-    document.getElementById("delete-user").href = "delete_user.php?id="+id;
-    document.getElementById("delete-user-confirm").innerHTML = "Are you sure you want to delete <em>"+username+"</em>?";
-}
-function addAdminModal(id, username) {
-    document.getElementById("add-admin").href = "add_admin.php?id="+id;
-    document.getElementById("add-admin-confirm").innerHTML = "Are you sure you want to make <em>"+username+"</em> an admin?";
-}
+    function deleteModal(id, username) {
+        document.getElementById("delete-user").href = "functions/delete_user.php?id="+id;
+        document.getElementById("delete-user-confirm").innerHTML = "Are you sure you want to delete <em>"+username+"</em>?";
+    }
+    function addAdminModal(id, username) {
+        document.getElementById("add-admin").href = "functions/add_admin.php?id="+id;
+        document.getElementById("add-admin-confirm").innerHTML = "Are you sure you want to make <em>"+username+"</em> an admin?";
+    }
+
+    function formCheck(e){
+        e.preventDefault();
+        let form = document.getElementById('add-user-form');
+
+        form.submit();
+
+    }
 </script>
 
 <!-- Script links -->
@@ -182,10 +205,6 @@ function addAdminModal(id, username) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<script>
-    $(function() {
-        
-    });
-</script>
+
 </body>
 </html>

@@ -21,33 +21,32 @@
     include('log-out.php');
     include('mysql_conn.php');
     include('sidebar_menu.php');
+
+    $getAdmins = $connection->prepare("SELECT * FROM admins");
+    $getAdmins->execute();
+    $admins = $getAdmins->fetchAll(); 
 ?>
 
     <div class="content">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Admin.." title="Type in a name">
         <table class="table" id="myTable">
             <tr class="header">
-                <th>Admins</th>
+                <th>Admin's Name</th>
+                <th>Admin's Email</th>
                 <th>Delete Admin</th>
             </tr>
-            <tr>
-                <td>firstadmin@gmail.com</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>secondadmin@gmail.com</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>firstadmin@gmail.com</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
-            <tr>
-                <td>secondadmin@gmail.com</td>
-                <td><button class="btn btn-responsive"><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
-            </tr>
+            <?php 
+                foreach ($admins as $admin){
+                    if ($admin['username'] !== $_SESSION['username']){
+                        echo '<tr>
+                                <td>'.$admin["username"].'</td>
+                                <td>'.$admin["email"].'</td>
+                                <td><button class="btn btn-responsive" onclick="deleteAdminModal('.$admin["id"].' ,`'.$admin["username"].'`)" ><a href="" data-toggle="modal" data-target="#deletemodal"><i class="material-icons">delete_forever</i></a></button></td>
+                            </tr>';
+                    }
+                }
+            ?>
         </table>
-        <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#adminmodal">Add Admin</a>
     </div>
     
 
@@ -91,12 +90,12 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <p class="lead modal-text">
+                <p class="lead modal-text" id="delete-admin-confirm">
                     Are you sure you want to delete this Admin?
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-primary btn-block">Delete Admin</a>
+                <a id="delete-admin" href="" class="btn btn-primary btn-block">Delete Admin</a>
             </div>
         </div>
     </div>
@@ -123,6 +122,11 @@ function myFunction() {
     }       
   }
 }
+
+function deleteAdminModal(id, username){
+    document.getElementById("delete-admin").href = "functions/delete_admin.php?id="+id;
+    document.getElementById("delete-admin-confirm").innerHTML = "Are you sure you want to revoke <em>"+username+"'s</em> privileges?";
+}
 </script>
 
 <!-- Script links -->
@@ -130,5 +134,6 @@ function myFunction() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>

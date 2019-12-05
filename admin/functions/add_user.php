@@ -1,5 +1,5 @@
 <?php 
-    include("mysql_conn.php");
+    include("../mysql_conn.php");
     if(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['department']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['department'])) {
         $email = $_POST['email'];
         $username = $_POST['username'];
