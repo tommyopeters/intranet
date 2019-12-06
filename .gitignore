@@ -1,2 +1,4 @@
 mysql_conn.php
 admin/mysql_conn.php
+uploads/
+post_images/
