@@ -25,6 +25,23 @@
     $getAdmins = $connection->prepare("SELECT * FROM admins");
     $getAdmins->execute();
     $admins = $getAdmins->fetchAll(); 
+
+    if(isset($_GET['error'])){
+        $error = $_GET['error'];
+        if($error == "fatal"){
+            echo "<script>alert('Fatal error')</script>";
+        }
+        
+    }
+    if(isset($_GET['success'])){
+        $success = $_GET['success'];
+        if($success == "admin_added"){
+            echo "<script>alert('Admin added successfully')</script>";
+        }
+        if($success == "admin_deleted"){
+            echo "<script>alert('Admin deleted successfully')</script>";
+        }
+    }
 ?>
 
     <div class="content">

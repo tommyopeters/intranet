@@ -28,5 +28,7 @@
         
             }
         }
-    }    
+    }else{
+        header('Location: ../users.php?error=incomplete_form');
+    }
 ?>

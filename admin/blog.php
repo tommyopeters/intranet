@@ -25,6 +25,33 @@
     $getPosts = $connection->prepare("SELECT * FROM posts");
     $getPosts->execute();
     $posts = $getPosts->fetchAll(); 
+
+
+    if(isset($_GET['error'])){
+        $error = $_GET['error'];
+        if($error == "invalid_file"){
+            echo "<script>alert('Invalid file. Please, upload an image.')</script>";
+        }
+        if($error == "upload_error"){
+            echo "<script>alert('Upload error, please try again.')</script>";
+        }
+        if($error == "fatal"){
+            echo "<script>alert('Fatal error')</script>";
+        }
+        
+    }
+    if(isset($_GET['success'])){
+        $success = $_GET['success'];
+        if($success == "post_edited"){
+            echo "<script>alert('Post edited successfully')</script>";
+        }
+        if($success == "post_deleted"){
+            echo "<script>alert('Post deleted successfully')</script>";
+        }
+        if($success == "post_added"){
+            echo "<script>alert('Post added successfully')</script>";
+        }
+    }
 ?>
 
     <div class="content">

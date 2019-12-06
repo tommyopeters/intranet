@@ -26,6 +26,40 @@
     $getUsers->execute();
     $users = $getUsers->fetchAll(); 
 
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    if(isset($_GET['error'])){
+        $error = $_GET['error'];
+        if($error == "email_exists"){
+            echo "<script>alert('Email already exists')</script>";
+        }
+        if($error == "username_exists"){
+            echo "<script>alert('Username already exists')</script>";
+        }
+        if($error == "admin_exists"){
+            echo "<script>alert('Already an admin')</script>";
+        }
+        if($error == "fatal"){
+            echo "<script>alert('Fatal error')</script>";
+        }
+        if($error == "incomplete_form"){
+            echo "<script>alert('Please, fill all fields')</script>";
+        }
+        
+    }
+    if(isset($_GET['success'])){
+        $success = $_GET['success'];
+        if($success == "user_added"){
+            echo "<script>alert('User added successfully')</script>";
+        }
+        if($success == "admin_added"){
+            echo "<script>alert('Admin added successfully')</script>";
+        }
+        if($success == "user_deleted"){
+            echo "<script>alert('User deleted successfully')</script>";
+        }
+    }
+
 ?>
     <div class="content">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for User.." title="Type in a name">
@@ -95,7 +129,7 @@ aria-hidden="true">
                     </div>
                     <div class="form-group required">
                         <label for="department">Department</label> <br>
-                        <select name="department" id="department">
+                        <select name="department" id="department" required>
                             <option value="" default>Select Department</option>
                             <option value="front-desk">Front Desk</option>
                             <option value="it">IT</option>
