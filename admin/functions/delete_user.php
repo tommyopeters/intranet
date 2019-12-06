@@ -27,7 +27,7 @@
             $stmt = $connection->prepare($sql);
             $stmt->execute(['id' => $id]);
             echo "User Deleted";
-            // header("Location: users.php?success=user_deleted)
+            header("Location: ../users.php?success=user_deleted");
 
 
         }

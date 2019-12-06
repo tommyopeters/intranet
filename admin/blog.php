@@ -72,14 +72,14 @@ aria-hidden="true">
                     <form action="functions/add_post.php" method="POST" enctype="multipart/form-data">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
+                            <input class="title" name="title" type="text" placeholder="A new post" required>
                         </div>
                         <div class="fgroup required">
                             <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="10" placeholder="Fill me with words..."></textarea>
+                            <textarea name="content" id="content" cols="90" rows="10" placeholder="Fill me with words..." required></textarea>
                         </div>
-                        <div class="fgroup required">
-                            <label for="image">Upload an image</label><br>
+                        <div class="fgroup">
+                            <label for="image">Upload an image: </label>
                             <input type="file" name="fileToUpload" id="fileToUpload1">
                         </div>
                         <button class="btn btn-block btn-info btn-responsive" type="submit">ADD</button>
@@ -133,11 +133,11 @@ aria-hidden="true">
                     <form action="" id="edit-post-form" method="POST" enctype="multipart/form-data">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
+                            <input class="title" name="title" type="text" placeholder="A new post" required>
                         </div>
                         <div class="fgroup required">
                             <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
+                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..." required></textarea>
                         </div>
                         <div class="fgroup">
                             <label for="fileToUpload">New Post Image: </label>

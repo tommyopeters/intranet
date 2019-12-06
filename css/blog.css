@@ -147,6 +147,12 @@ nav .navbar{
 .content .row i{
     margin: 2px;
 }
+.content .grid-container .btn{
+    width: 20%;
+    background-color: var(--primary-color);
+    opacity: 0.6;
+    border: none;
+}
 .info a{
     font-size: 15px;
 }
@@ -218,6 +224,17 @@ padding: 20px;
 
   ::-webkit-scrollbar-thumb:hover {
     background: #888; 
+  }
+
+  #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
   }
 
 

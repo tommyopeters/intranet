@@ -14,5 +14,6 @@
         $stmt->execute(['title' => $post_title, 'description' => $post_description, 'content' => $post_content,  'department' => $department]);
 
         echo "Post added";
+        header("Location: ../posts.php?success=post_added");
     }
 ?>

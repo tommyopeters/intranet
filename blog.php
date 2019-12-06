@@ -25,7 +25,7 @@ include('header.php');
     <div class="content">
         <!-- <h1 class="text-center">BLOG</h1> -->
         <div class="grid-container container">
-            
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Posts.." title="Type in a name">
 <?php
     foreach ($posts as $post) {
 
@@ -35,7 +35,7 @@ include('header.php');
         $postUserStmt->execute(['id' => $post["post_user_id"]]);
         $postUser = $postUserStmt->fetch(PDO::FETCH_ASSOC);
         // echo $post['post_title'] . '<br />';
-        echo '<div class="row">
+        echo '<div class="row" id="row">
         <h2 class="padding"><a class="header" href="#" data-toggle="modal" data-target="#post'.$post["id"].'">'.$post["post_title"].'</a></h2>
         <div class="info">
             <ul>
@@ -101,6 +101,28 @@ include('header.php');
         Copyright &copy; 2019 <a href="http://btmlimited.net/">BTML</a>
         </div>
 </footer>
+
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("row");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
 <!-- Script links -->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>

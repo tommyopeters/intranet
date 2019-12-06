@@ -80,11 +80,11 @@ aria-hidden="true">
                     <form action="functions/add_department_post.php" method="POST" >
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
+                            <input class="title" name="title" type="text" placeholder="A new post" required>
                         </div>
                         <div class="fgroup required">
                             <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
+                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."  required></textarea>
                         </div>
                         <div class="fgroup required">
                             <label for="department">Department</label><br>
@@ -148,12 +148,12 @@ aria-hidden="true">
                     <form action="" id="edit-post-form" method="POST">
                         <div class="fgroup required">
                             <label for="title">Post Title</label><br>
-                            <input class="title" name="title" type="text" placeholder="A new post">
+                            <input class="title" name="title" type="text" placeholder="A new post" required>
                         </div>
                         
                         <div class="fgroup required">
                             <label for="content">Post Content</label><br>
-                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..."></textarea>
+                            <textarea name="content" id="content" cols="90" rows="5" placeholder="Fill me with words..." required></textarea>
                         </div>
                         <div class="fgroup">
                             <label for="department">Department</label><br>

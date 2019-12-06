@@ -22,6 +22,7 @@
 
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
                 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
+                header("Location: ../blog.php?error=invalid_file");
             }else{
                 if (file_exists($target_file)) {
                     $basefilename = file_newname($target_dir, $basefilename);
@@ -37,9 +38,10 @@
                     $stmt->execute([$post_title, $post_description,$post_content, $filename, $post_id]);
 
                     echo "Post edited and image added";
-                    // header('Location: department.php?upload=success');
+                    header('Location: ../blog.php?success=post_edited');
                 } else {
                     echo "Sorry, there was an error uploading your file" . "<br>";
+                    header("Location: ../blog.php?error=upload_error");
                 }
                 
             }
@@ -51,6 +53,7 @@
             $stmt->execute([$post_title, $post_description,$post_content, $post_id]);
 
             echo "Post edited";
+            header('Location: ../blog.php?success=post_edited');
         }
     }
 
