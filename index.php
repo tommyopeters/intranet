@@ -23,6 +23,11 @@
         $getPosts = $connection->prepare("SELECT * FROM posts limit 3");
         $getPosts->execute();
         $posts = $getPosts->fetchAll();
+
+        $getNotices = $connection->prepare("SELECT * FROM department_posts WHERE department = 'general'");
+        $getNotices->execute();
+        $notices = $getNotices->fetchAll();
+
     ?>
 
     <!-- Header -->
@@ -51,16 +56,16 @@
         <div class="rightcolumn">
             <h1 class="header">Notice</h1>
             <!-- <div id="noticeboard" class="grid-item"><script src="https://widgets.remind.com/iframe.js?token=fc34a9d0d860013729520242ac110003&height=400&join=false"></script></div> -->
-            <div class="row">
-                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
-            </div>
-            <div class="row">
-                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
-            </div>
-            <div class="row">
-                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal">Post Title</a></h3>
-            </div>
-            <h4><a class="btn btn-secondary btn-responsive" href="" data-toggle="modal" data-target="#addnoticemodal">ADD</a></h4>
+                
+                <?php 
+                    foreach ($notices as $notice){
+                        echo '<div class="row">
+                                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal'.$notice["id"].'">'.$notice["post_title"].'</a></h3>
+                            </div>';
+                    }
+                ?>
+                <br>
+                <br>
             <div class="grid-item calender">
                     <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
                     <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
@@ -78,23 +83,28 @@
         </div>
     </div> -->
 
-<!-- Notice Modal -->
-<div class="modal fade bs-example-modal-md" id="noticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Post Title</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+
+
+<?php
+    foreach($notices as $notice){
+        echo '<div class="modal fade bs-example-modal-md" id="noticemodal'.$notice["id"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">'.$notice["post_title"].'</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead modal-text">'.$notice["post_content"].'</p>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p class="lead modal-text">Post Content</p>
-            </div>
-        </div>
-    </div>
-</div>
+        </div>';
+    }
+?>
 
 <!-- Add Notice -->
 <div class="modal fade bs-example-modal-md" id="addnoticemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
