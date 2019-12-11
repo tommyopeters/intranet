@@ -22,7 +22,7 @@
      center:'title',
      right:'month,agendaWeek,agendaDay'
     },
-    events: 'load_events.php',
+    events: 'load.php',
     selectable:true,
     selectHelper:true,
     select: function(start, end, allDay)
@@ -32,9 +32,8 @@
      {
       var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
       var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-
       $.ajax({
-       url:"insert_event.php",
+       url:"insert.php",
        type:"POST",
        data:{title:title, start:start, end:end},
        success:function()
@@ -45,7 +44,7 @@
       })
      }
     },
-    editable:true,
+    editable:false,
     eventResize:function(event)
     {
      var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");

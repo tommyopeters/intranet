@@ -14,7 +14,7 @@
 
     <title>Department</title>
 </head>
-<body>
+<body>  
 <!-- Navigation -->
 <?php
 
@@ -36,14 +36,25 @@
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search files.." title="Type in a name">
     <table id="myTable">
         <?php
+            $adminsql = "SELECT * FROM admins WHERE email = :email";
+            $adminstmt = $connection->prepare($adminsql);
+            $adminstmt->execute(['email' => $_SESSION['email']]);
+            $adminDelete = "";
+        
             if($getUploads->rowCount() < 1){
                 echo "<br> No resources at the moment <br> <br>";
             }
             else{
                 foreach ($uploads as $upload){
+
+                    if($adminstmt->rowCount() > 0){
+                        $adminDelete = "<td class='td2'><button onclick='deleteUpload(".$upload['id'].")'><i href='delete_upload.php?id=".$upload['id']."' class='material-icons'>delete_forever</i></button></td>";
+                    };
+
                     echo "<tr>
                             <td class='td1'>".$upload['filename']."</td>
                             <td class='td2'><a href='uploads/".$_SESSION['department']."/".$upload['filename']."' download><button><i class='material-icons'>file_download</i></button></a></td>
+                            ".$adminDelete."
                         </tr>";
                 }
             }
@@ -154,6 +165,10 @@ function myFunction() {
       }
     }       
   }
+}
+
+function deleteUpload(e){
+    window.location.href = "delete_upload.php?id="+e
 }
 </script>
 

@@ -1,0 +1,194 @@
+{
+    "pma_version": "4.9.1",
+    "browser_name": "CHROME",
+    "browser_version": "78.0.3904.108",
+    "user_os": "Win",
+    "server_software": "Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.3.11",
+    "user_agent_string": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
+    "locale": "en",
+    "configuration_storage": "enabled",
+    "php_version": "7.3.11",
+    "script_name": "sql.php",
+    "exception_type": "js",
+    "exception": {
+        "mode": "stack",
+        "name": "ReferenceError",
+        "message": "PMA_makegrid is not defined",
+        "stack": [
+            {
+                "line": "292",
+                "func": "",
+                "context": [
+                    "            if (lastException === ex) {",
+                    "                processLastException();",
+                    "            }",
+                    "        }, (stack.incomplete ? 2000 : 0));",
+                    "",
+                    "        throw ex; // re-throw to propagate to the top level (and cause wind//...",
+                    "    }",
+                    "",
+                    "    report.subscribe = subscribe;",
+                    "    report.unsubscribe = unsubscribe;",
+                    "    return report;"
+                ],
+                "uri": "js/vendor/tracekit.js?v=4.9.1",
+                "scriptname": "js/vendor/tracekit.js"
+            },
+            {
+                "func": "HTMLTableElement.",
+                "line": "338",
+                "column": "13",
+                "context": [
+                    "     * triggered manually everytime the table of results is reloaded",
+                    "     * @memberOf    jQuery",
+                    "     */",
+                    "    $(document).on('makegrid', '.sqlqueryresults', function () {",
+                    "        $('.table_results').each(function () {",
+                    "            PMA_makegrid(this);",
+                    "        });",
+                    "    });",
+                    "",
+                    "    /*",
+                    "     * Attach a custom event for sticky column headings which will be"
+                ],
+                "uri": "js/sql.js?v=4.9.1",
+                "scriptname": "js/sql.js"
+            },
+            {
+                "func": "Function.each",
+                "line": "2",
+                "column": "2777",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            },
+            {
+                "func": "jQuery.fn.init.each",
+                "line": "2",
+                "column": "1419",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            },
+            {
+                "func": "HTMLDivElement.",
+                "line": "337",
+                "column": "29",
+                "context": [
+                    "     * Attach the {@link makegrid} function to a custom event, which will be",
+                    "     * triggered manually everytime the table of results is reloaded",
+                    "     * @memberOf    jQuery",
+                    "     */",
+                    "    $(document).on('makegrid', '.sqlqueryresults', function () {",
+                    "        $('.table_results').each(function () {",
+                    "            PMA_makegrid(this);",
+                    "        });",
+                    "    });",
+                    "",
+                    "    /*"
+                ],
+                "uri": "js/sql.js?v=4.9.1",
+                "scriptname": "js/sql.js"
+            },
+            {
+                "func": "HTMLDivElement.new_func",
+                "line": "265",
+                "column": "33",
+                "context": [
+                    "     */",
+                    "    wrap_function: function (func) {",
+                    "        if (!func.wrapped) {",
+                    "            var new_func = function () {",
+                    "                try {",
+                    "                    return func.apply(this, arguments);",
+                    "                } catch (x) {",
+                    "                    TraceKit.report(x);",
+                    "                }",
+                    "            };",
+                    "            new_func.wrapped = true;"
+                ],
+                "uri": "js/error_report.js?v=4.9.1",
+                "scriptname": "js/error_report.js"
+            },
+            {
+                "func": "HTMLDocument.dispatch",
+                "line": "2",
+                "column": "42571",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            },
+            {
+                "func": "HTMLDocument.$event.dispatch",
+                "line": "374",
+                "column": "19",
+                "context": [
+                    "$event.dispatch = function( event ){",
+                    "\tif ( $.data( this, \"suppress.\"+ event.type ) - new Date().getTime() > 0 ){",
+                    "\t\t$.removeData( this, \"suppress.\"+ event.type );",
+                    "\t\treturn;",
+                    "\t}",
+                    "\treturn $dispatch.apply( this, arguments );",
+                    "};",
+                    "",
+                    "// event fix hooks for touch events...",
+                    "var touchHooks = ",
+                    "$event.fixHooks.touchstart = "
+                ],
+                "uri": "js/vendor/jquery/jquery.event.drag-2.2.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.event.drag-2.2.js"
+            },
+            {
+                "func": "HTMLDocument.v.handle",
+                "line": "2",
+                "column": "40572",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            },
+            {
+                "func": "Object.trigger",
+                "line": "2",
+                "column": "70627",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            },
+            {
+                "func": "HTMLDivElement.",
+                "line": "2",
+                "column": "71222",
+                "context": [
+                    "/*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/l//...",
+                    "!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof modul//...",
+                    ""
+                ],
+                "uri": "js/vendor/jquery/jquery.min.js?v=4.9.1",
+                "scriptname": "js/vendor/jquery/jquery.min.js"
+            }
+        ],
+        "incomplete": "false",
+        "partial": "true",
+        "uri": "sql.php?pos=0"
+    }
+}
