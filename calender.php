@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,95 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-  <script>
-        $(document).ready(function() {
-   var calendar = $('#calendar').fullCalendar({
-    editable:false,
-    header:{
-     left:'prev,next today',
-     center:'title',
-     right:'month,agendaWeek,agendaDay'
-    },
-    events: 'load_events.php',
-    selectable:true,
-    selectHelper:true,
-    select: function(start, end, allDay)
-    {
-     var title = prompt("Enter Event Title");
-     if(title)
-     {
-      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
-      $.ajax({
-       url:"insert_event.php",
-       type:"POST",
-       data:{title:title, start:start, end:end},
-       success:function()
-       {
-        calendar.fullCalendar('refetchEvents');
-        alert("Added Successfully");
-       }
-      })
-     }
-    },
-    editable:true,
-    eventResize:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      url:"update.php",
-      type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function(){
-       calendar.fullCalendar('refetchEvents');
-       alert('Event Update');
-      }
-     })
-    },
-
-    eventDrop:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      url:"update.php",
-      type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function()
-      {
-       calendar.fullCalendar('refetchEvents');
-       alert("Event Updated");
-      }
-     });
-    },
-
-    eventClick:function(event)
-    {
-     if(confirm("Are you sure you want to remove it?"))
-     {
-      var id = event.id;
-      $.ajax({
-       url:"delete.php",
-       type:"POST",
-       data:{id:id},
-       success:function()
-       {
-        calendar.fullCalendar('refetchEvents');
-        alert("Event Removed");
-       }
-      })
-     }
-    },
-
-   });
-  });
-  </script>
 
       
     <title>BTM Circle</title>
@@ -109,7 +21,67 @@
 <body>
 <!-- Navigation -->
 <?php
-include('header.php')
+    include('header.php');
+    $adminsql = "SELECT * FROM admins WHERE email = :email";
+    $adminstmt = $connection->prepare($adminsql);
+    $adminstmt->execute(['email' => $_SESSION['email']]);
+    if($adminstmt->rowCount() < 1){
+        $adminTrue = "false";
+        $deletable = "";
+    }else{
+        $adminTrue = "true";
+        $deletable = 'eventResize:function(event)
+        {
+         var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+         var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+         var title = event.title;
+         var id = event.id;
+         $.ajax({
+          url:"update_event.php",
+          type:"POST",
+          data:{title:title, start:start, end:end, id:id},
+          success:function(){
+           calendar.fullCalendar("refetchEvents");
+           alert("Event Update");
+          }
+         })
+        },
+        eventDrop:function(event)
+        {
+         var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+         var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+         var title = event.title;
+         var id = event.id;
+         $.ajax({
+          url:"update_event.php",
+          type:"POST",
+          data:{title:title, start:start, end:end, id:id},
+          success:function()
+          {
+           calendar.fullCalendar("refetchEvents");
+           alert("Event Updated");
+          }
+         });
+        },
+    
+        eventClick:function(event)
+        {
+         if(confirm("Are you sure you want to remove it?"))
+         {
+          var id = event.id;
+          $.ajax({
+           url:"delete_event.php",
+           type:"POST",
+           data:{id:id},
+           success:function()
+           {
+            calendar.fullCalendar("refetchEvents");
+            alert("Event Removed");
+           }
+          })
+         }
+        },';
+    };
 ?>
 
 <!-- Calender Plugin -->
@@ -142,6 +114,45 @@ include('header.php')
         Copyright &copy; 2019 <a href="http://btmlimited.net/">BTML</a>
         </div>
 </footer>
+<script>
+        $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable: <?php echo $adminTrue ?>,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    events: 'load_events.php',
+    selectable: <?php echo $adminTrue ?>,
+    selectHelper: <?php echo $adminTrue ?>,
+    select: function(start, end, allDay)
+    {
+     var title = prompt("Enter Event Title");
+     if(title)
+     {
+      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
+      $.ajax({
+       url:"insert_event.php",
+       type:"POST",
+       data:{title:title, start:start, end:end},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Added Successfully");
+       }
+      })
+     }
+    },
+    editable: <?php echo $adminTrue ?>,
+    
+
+    <?php echo $deletable ?>    
+
+   });
+  });
+  </script>
 </body>
 </html>

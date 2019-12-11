@@ -20,7 +20,7 @@
     <?php 
         include('header.php');
         include('mysql_conn.php');
-        $getPosts = $connection->prepare("SELECT * FROM posts limit 3");
+        $getPosts = $connection->prepare("SELECT * FROM posts ORDER BY post_date DESC limit 3");
         $getPosts->execute();
         $posts = $getPosts->fetchAll();
 
@@ -175,7 +175,7 @@ aria-hidden="true">
                   </div>
                   <div class="modal-body mx-3 grid-container">
                       <div class="mb-4 grid-item">
-                          <img class="modal-img img-responsive" src="img/collaborate.jpg" alt="" width="100%">
+                          <img class="modal-img img-responsive" src="post_images/'.$post["post_image"].'" alt="" width="100%">
                           <p class="lead modal-text">'.$post["post_content"].'</p>
                       </div>
                   </div>
