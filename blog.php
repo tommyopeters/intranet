@@ -1,3 +1,4 @@
+<?php include('login_check.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
 <body>
 
 <?php
-include('header.php');
+    include('header.php');
     include('mysql_conn.php');
     $getPosts = $connection->prepare("SELECT * FROM posts");
     $getPosts->execute();

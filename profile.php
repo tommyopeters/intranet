@@ -1,3 +1,4 @@
+<?php include('login_check.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +16,6 @@
 </head>
 <body>
     <?php
-        session_start();
-        include("mysql_conn.php");
-        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-            header('Location: login.php'); 
-        }
-
         //FORM SUBMISSION INPUTS CHECK
         if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password-prev']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password-prev'])){
             $username = $_POST['username'];

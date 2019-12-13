@@ -1,3 +1,4 @@
+<?php include('login_check.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,53 +25,63 @@
         $getPosts->execute();
         $posts = $getPosts->fetchAll();
 
-        $getNotices = $connection->prepare("SELECT * FROM department_posts WHERE department = 'general'");
+        $getNotices = $connection->prepare("SELECT * FROM department_posts WHERE department = 'general' ORDER BY post_date DESC limit 10");
         $getNotices->execute();
         $notices = $getNotices->fetchAll();
 
+        
+        $getEvents = $connection->prepare("SELECT * FROM events ORDER BY start_event ASC limit 5");
+        $getEvents->execute();
+        $events = $getEvents->fetchAll();
     ?>
-
-    <!-- Header -->
+    <!-- Header --> 
 
     <div id="welcome">
-        <h1><i class="fa fa-smile-o"></i>
+        <h1><i class="fa fa-paper-plane-o"></i>
             <span
                 class="txt-rotate"
                 data-period="2000"
-                data-rotate='[ "Welcome.", "Hello.", "Greetings." ]'></span>
+                data-rotate='[ "Welcome <?php echo $_SESSION['username'] ?>.", "Hello <?php echo $_SESSION['username'] ?>.", "Greetings <?php echo $_SESSION['username'] ?>." ]'></span>
         </h1>
     </div>
     <div class="content">
         <div class="leftcolumn">
-            <?php 
+        <?php 
             foreach ($posts as $post){
             echo ' 
                 <div class="row">
                     <h2 class="padding"><a class="header" href="" data-toggle="modal" data-target="#post'.$post["id"].'">'.$post["post_title"].'</a></h2>
-                    <p class="lead padding">Post description</p>
+                    <p class="lead padding">'.$post['post_description'].'</p>
                     <a class="padding button" href="#" data-toggle="modal" data-target="#post'.$post["id"].'"><i class="material-icons">arrow_forward</i><p>Read More</p></a>
                 </div>';
                 }
             ?>
+            <h4><a class="btn btn-secondary blog-btn btn-responsive" href="blog.php">VISIT BLOG</a></h4>
         </div>
         <div class="rightcolumn">
             <h1 class="header">Notice</h1>
-            <!-- <div id="noticeboard" class="grid-item"><script src="https://widgets.remind.com/iframe.js?token=fc34a9d0d860013729520242ac110003&height=400&join=false"></script></div> -->
-                
                 <?php 
                     foreach ($notices as $notice){
-                        echo '<div class="row">
-                                <h3 class="header"><a href="#" data-toggle="modal" data-target="#noticemodal'.$notice["id"].'">'.$notice["post_title"].'</a></h3>
-                            </div>';
+                        echo '
+                        <button class="accordion">'.$notice["post_title"].'</button>
+                        <div class="panel">
+                        <p>'.$notice["post_content"].'</p>
+                        </div>';
                     }
                 ?>
                 <br>
                 <br>
-            <div class="grid-item calender">
-                    <div data-tockify-component="mini" data-tockify-calendar="btm.calender"></div>
-                    <script data-cfasync="false" data-tockify-script="embed"src="https://public.tockify.com/browser/embed.js"></script>
-                <h4><a class="cbtn1" href="calender.php">Show Full Calender</a></h4>
-                <h4><a class="cbtn2" href="https://tockify.com/tkf2/submitEvent/312050c0b844454e8d0ed4327c5e8246" target="_blank">Submit an Event</a></h4>
+            <div class="events">
+                <h1 class="header">Upcoming Events</h1>
+                <?php 
+                    foreach ($events as $event){
+                        echo '
+                        <div class="row">
+                            <h3 class="header">'.$event["title"].'</h3>
+                        </div>';
+                    }
+                ?>
+                <h4><a class="btn btn-responsive btn-secondary btn-sm" href="calender.php">Show Full Calender</a></h4>
             </div>
         </div>
     </div>
@@ -83,8 +94,7 @@
         </div>
     </div> -->
 
-
-
+<!-- Notice Modal -->
 <?php
     foreach($notices as $notice){
         echo '<div class="modal fade bs-example-modal-md" id="noticemodal'.$notice["id"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -136,29 +146,7 @@ aria-hidden="true">
     </div>
 </div>
 
-<!-- Content -->
-<div class="grid-container container grid1">
-    
-    <!-- <div class="grid-item">
-        
-    </div> -->
-    <!-- <div class="grid-item">
-        <h1>Notice Board</h1>
-        <dl>
-            <dt>Lorem Ipsum Dolor</dt>
-            <dd>8:00am Monday</dd>
-            <dt>Lorem Ipsum Dolor</dt>
-            <dd>12:00am Wednesday</dd>
-            <dt>Lorem Ipsum Dolor</dt>
-            <dd>1:00pm Saturday</dd>
-            <dt>Lorem Ipsum Dolor</dt>
-            <dd>4:00pm Tuesday</dd>
-        </dl>
-    </div> -->
-
-</div>
-
-<!-- Cards -->
+<!-- Post modal -->
 <div class="container carddeck">
     <div class="card-deck">
 <?php 
@@ -188,6 +176,28 @@ aria-hidden="true">
 </div>
 
 
+<!-- Content -->
+<div class="grid-container container grid1">
+    
+    <!-- <div class="grid-item">
+        
+    </div> -->
+    <!-- <div class="grid-item">
+        <h1>Notice Board</h1>
+        <dl>
+            <dt>Lorem Ipsum Dolor</dt>
+            <dd>8:00am Monday</dd>
+            <dt>Lorem Ipsum Dolor</dt>
+            <dd>12:00am Wednesday</dd>
+            <dt>Lorem Ipsum Dolor</dt>
+            <dd>1:00pm Saturday</dd>
+            <dt>Lorem Ipsum Dolor</dt>
+            <dd>4:00pm Tuesday</dd>
+        </dl>
+    </div> -->
+
+</div>
+
 
 
 <!-- Footer -->
@@ -215,6 +225,25 @@ aria-hidden="true">
         Copyright &copy; 2019 <a href="http://btmlimited.net/">BTML</a>
         </div>
 </footer>
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
 
 <!-- Script links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

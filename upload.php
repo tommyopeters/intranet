@@ -18,9 +18,7 @@ if (file_exists($target_file)) {
     echo "Sorry, file already exists." . "<br>";
     $uploadOk = 0;
     header("Location: department.php?error=file_exists");
-  }
-
-  else {
+  }else {
     if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       echo "The file " . $basefilename . " has been uploaded." . "<br>";
       

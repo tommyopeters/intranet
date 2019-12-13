@@ -46,14 +46,14 @@ nav .navbar{
     padding: 10px;
     border: none;
     border-bottom: 2px solid rgb(29, 29, 29);
-}
+} 
 #welcome span{
     background-color: #222;
 }
   #welcome h1 {
     /* color: #888; */
-    font-size: 90px;
-    padding: 5%;
+    font-size: 60px;
+    padding: 2%;
     background-color: #222;
   color: #aaa;
   font-weight: 800;
@@ -70,7 +70,7 @@ nav .navbar{
 }
 .leftcolumn .row{
     background-color: white;
-    margin: 20px 40px 50px 40px;
+    margin: 20px 60px 50px 60px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* border: 1px solid black; */
 }
@@ -89,7 +89,7 @@ nav .navbar{
 .content .leftcolumn h2{
     /* padding-right: 500px; */
     /* border: 1px solid #000; */
-    font-size: 35px;
+    /* font-size: 17px; */
     width: 100%;
     margin-top: 20px;
 }
@@ -106,7 +106,10 @@ nav .navbar{
     font-weight: normal;
     transition: 0.3s;
     opacity: 0.5;
-    font-size: 25px;
+    font-size: 17px;
+}
+.content .row .info li a{
+    color: rgb(252, 133, 73);
 }
 .content .leftcolumn .row .header{
     color: black !important;
@@ -118,7 +121,7 @@ nav .navbar{
     /* opacity: 0.5; */
 }
 .content .leftcolumn .row .header:hover{
-    color: var(--primary-color);
+    color: var(--primary-color); 
     opacity: 0.5 !important;
 }
 .content .row li{
@@ -139,10 +142,10 @@ nav .navbar{
     margin-left: 0.5px;
 }
 .content .row .button{
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
     /* border: 1px solid #000; */
-    padding: 2px 20px 0px 20px;
+    padding: 0px 20px 0px 20px;
     border-radius: 20px;
     opacity: 0.6;
 	transition: 0.3s;
@@ -154,7 +157,7 @@ nav .navbar{
 .content .row .button p{
     /* border: 1px solid black; */
     float: right;
-    font-size: 17px;
+    font-size: 14px;
     padding-top: 5px;
 }
 .content .row .button:hover{
@@ -164,21 +167,23 @@ nav .navbar{
 }
 .content .row p{
     /* float: right; */ 
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 0px;
 }
 .content .row .info a{
-    font-size: 16px;
+    font-size: 14px;
+    width: 100%;
 }
 .content .row .button i{
     /* border: 1px solid #000; */
     color: white; 
-    font-size: 18px;
+    font-size: 14px;
+    margin-top: 7px;
 }
 
 .leftcolumn {   
     float: left;
-    width: 70%;
+    width: 65%;
     display: grid;
   }
   .rightcolumn {
@@ -187,12 +192,14 @@ nav .navbar{
     /* background-color: #222; */
     padding-left: 10px;
     padding-right: 10px;
+    margin-right: 30px;
   }
   .rightcolumn h1{
-      font-size: 25px;
+      font-size: 17px;
   }
   .rightcolumn h3{
-    font-size: 1px;
+    font-size: 12px;
+    opacity: 0.9;
 }
   .rightcolumn h1, h3{
       padding: 5px;
@@ -203,9 +210,9 @@ nav .navbar{
   .rightcolumn .header{
     color: white;
   }
-  .rightcolumn .header a{
+  .rightcolumn .header{
       color: white;
-      font-size: 20px;
+      font-size: 15px;
   }
   .rightcolumn .btn{
       width: 100%;
@@ -227,21 +234,85 @@ nav .navbar{
     display: table;
     clear: both;
   }
+.leftcolumn .btn{
+    width: 20%;
+    margin-left: 50px;
+    background-color: rgb(252, 133, 73);
+    opacity: 0.6;
+    border: none;
+}
+
+.modal .modal-content .modal-header .modal-title{
+    font-size: 17px;
+  }
+  .modal .modal-content .modal-body label, input, select, textarea{
+    font-size: 15px;
+  }
+  .modal .modal-content .btn{
+    font-size: 14px;
+  }
+  .modal .modal-content .modal-body .modal-text{
+    font-size: 15px;
+  }
 
 
 
 
 
+  .accordion {
+    background-color: rgb(65, 64, 64);
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+    padding: 5px;
+    width: 80%;
+    margin-left: 10%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+    transition: 0.4s;
+    margin-top: 10px;
+  }
 
+  .accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2212";
+  }
+  
+  .active, .accordion:hover {
+    background-color: #222; 
+  }
+  
+  .panel {
+    padding: 8px;
+    display: none;
+    background-color: rgb(253, 251, 251);
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+	-moz-transition:    all 0.3s ease-in-out;
+	-ms-transition:     all 0.3s ease-in-out;
+	-o-transition:      all 0.3s ease-in-out;
+	transition:         all 0.3s ease-in-out;
 
-
-
+	-webkit-box-shadow: 0px 5px 30px 0px rgba(38,50,56,0.15);	
+	-moz-box-shadow: 0px 5px 30px 0px rgba(38,50,56,0.15);	
+	box-shadow: 0px 5px 30px 0px rgba(38,50,56,0.15);
+  }
 
 
 
 
 .header h2{
-	font-size: 2rem;
+	font-size: 1rem;
 }
   .carddeck{
       margin-top: 30px;
@@ -268,29 +339,10 @@ nav .navbar{
     /* font-size: 30px; */
     /* text-align: center; */
   }
-.calender h4{
-    margin-top: 10px;
-    text-align: center;
-    font-size: 20px;
-  }
-.calender h4 a{
-    color: var(--light-color);
-    transition: 0.5s;    
-}
-.calender h4 a:hover{
-    opacity: 0.4;
-    text-decoration: none;
-}
-.cbtn1, .cbtn2{
-    padding: 5px 20px 5px 20px;
-	opacity: 0.6;
-	transition: 0.3s;
-	background-color: black;
-    width: 100%;
-	font-size: 15px;
-}
- .grid-container .calender .cbtn1 {
-	color: var(--light-color);
+body .container .calender{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border: 1px solid black;
 }
 .grid-item dd{
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -323,7 +375,9 @@ nav .navbar{
 .mb-4, .mb-5{
     border: none;
 }
-
+.blog-btn{
+    font-size: 14px;
+}
 .fgroup.required label:after{
 content: ' *';
 color: rgb(205, 44, 44);
@@ -356,7 +410,7 @@ border: none;
   ::-webkit-scrollbar-track {
     background: #aaa;
   }
-
+ 
   ::-webkit-scrollbar-thumb {
     background: rgb(65, 64, 64); 
     border-radius: 100px;
@@ -379,7 +433,7 @@ footer .footer-cols{
 	grid-template-columns: repeat(2, 1fr);
 	padding: 2rem;
 	text-align: left;
-	font-size: 14px;
+	font-size: 12px;
 }
 footer .footer-cols ul{
     list-style: none;
@@ -393,7 +447,7 @@ footer .footer-cols ul li a:hover{
     transition: 0.5s;
 }
 footer .footer-cols ul li:first-child{
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	padding-bottom: 0.5rem;
 	border-bottom: #444 solid 1px;
 	margin-bottom: 1rem;
@@ -436,6 +490,9 @@ footer .col1{
 footer .col2{
     padding-left: 0px;
 }
+.content .row li{
+    display: grid;
+}
 }
 
 @media screen and (max-width: 580px){
@@ -454,6 +511,9 @@ footer .col2{
 }
 .card{
     font-size: 5px;
+}
+.content .row li{
+    display: grid;
 }
 }
 
@@ -474,6 +534,9 @@ footer .col1{
 }
 footer .col2{
     padding-left: 0px;
+}
+.content .row li{
+    display: grid;
 }
 }
 
@@ -506,8 +569,16 @@ footer .col1{
 footer .col2{
     padding-left: 0px;
 }
+.content .row li{
+    display: grid;
+}
 }
 
+@media screen and (max-width: 900px){
+    .content .row li{
+        display: inline;
+    }
+}
 @media screen and (max-width: 992px){
 .modal-body {
     display: grid;
@@ -520,6 +591,9 @@ footer .col2{
 .cbtn1, .cbtn2{
     padding: 5px 10px 5px 10px;
 	font-size: 14px;
+}
+.content .row li{
+    display: grid;
 }
 }
 

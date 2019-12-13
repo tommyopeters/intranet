@@ -1,11 +1,3 @@
-
-<?php 
-    session_start();
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-        header('Location: login.php');
-    }
-    include('mysql_conn.php');
-?>
 <link rel="stylesheet" href="css/header.css">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light static-top">
@@ -18,7 +10,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="active navbar-item"><a href="index.php">Home</a></li>
+                <li class="navbar-item"><a href="index.php">Home</a></li>
                 <li class="navbar-item"><a href="blog.php">Blog</a></li>
                 <li class="navbar-item">
                     <a href="department.php">Department</a>
