@@ -48,7 +48,7 @@
                     if(mail($email,$subject,$txt,$headers)){
                         $sql = "UPDATE workers SET password=? WHERE email=?";
                         $stmt = $connection->prepare($sql);
-                        $stmt->execute([$email]);
+                        $stmt->execute([$newpassword, $email]);
                         header("Location: login.php?success=password_changed");
                         
                     }else{
