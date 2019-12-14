@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+    if(isset($_SESSION['username'])){
+        header("Location: index.php");
+    };
+    ob_start();
+    include('mysql_conn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +25,46 @@
         <img src="img/logoedit.jpg" alt="">
     </div>
     <div class="rightcolumn">
-        <form action="" method="POST">
+        
+        <?php
+            if(isset($_POST['email'])){
+                $email = $_POST['email'];
+                
+                function random_strings($length_of_string){
+                    $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+                    return substr(str_shuffle($str_result), 0, $length_of_string); 
+                }
+                $newpassword = random_strings(10).rand(12,98);
+
+                $checksql = "SELECT * FROM workers WHERE email=?";
+                $checkstmt = $connection->prepare($checksql);
+                $checkstmt->execute([$email]);
+                if($checkstmt->rowCount() < 1){
+                    header("Location: changepassword.php?error=wrong_email");
+                }else{
+                    $subject = "Password Reset";
+                    $txt = "Your new generated password is: ".$newpassword."\n Please login in and change your password";
+                    $headers = "From: admin@btm.com";
+                    if(mail($email,$subject,$txt,$headers)){
+                        $sql = "UPDATE workers SET password=? WHERE email=?";
+                        $stmt = $connection->prepare($sql);
+                        $stmt->execute([$email]);
+                        header("Location: login.php?success=password_changed");
+                        
+                    }else{
+                        echo "Error sending email. Password not reset";
+                    }
+                }
+
+                
+                
+            }
+        ?>
+            <form action="" method="POST">
             <label for="email">Email</label>
             <input id="email" type="text" placeholder="Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
     
-            <button type="submit">Send password reset link</button><br>
+            <button type="submit">Password Reset</button><br>
         </form>
     </div>
 </div>
