@@ -1,8 +1,9 @@
+<?php include('mysql_conn.php'); ?>
 <link rel="stylesheet" href="css/header.css">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#">  
             <img src="img/logo.png" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,15 +28,15 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle navbar-item" data-toggle="dropdown" href="#">Useful Links <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="192.168.83.230">Mail 2</a></li>
-                        <li><a href="192.168.83.231">Mail 3</a></li>
-                        <li><a href="http://192.168.83.208/nucorelib/basic_users/login">TRAACS</a></li>
-                        <li><a href="197.255.61.206">TBF</a></li>
-                        <li><a href="journeyeasy.net">Journeyeasy</a></li>
-                        <li><a href="https://192.168.83.226:8008/">Enclave</a></li>
+                        <li><a href="https://192.168.83.230:8443" target="_blank">Mail 2</a></li>
+                        <li><a href="https://192.168.83.231:8443" target="_blank">Mail 3</a></li>
+                        <li><a href="http://192.168.83.208/nucorelib/basic_users/login" target="_blank">TRAACS</a></li>
+                        <li><a href="http://197.255.61.206" target="_blank">TBF</a></li>
+                        <li><a href="http://journeyeasy.net" target="_blank">Journeyeasy</a></li>
+                        <li><a href="https://192.168.83.226:8008" target="_blank">Enclave</a></li>
                     </ul>
                 </li>
-                <li class="navbar-item"><a href="#" data-toggle="modal" data-target="#modalcontact">Contact</a></li>
+                <li class="navbar-item"><a href="#" data-toggle="modal" data-target="#modalcontact">Intercom Directory</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle navbar-itemm" data-toggle="dropdown" href="#"><i class="far fa-user" aria-hidden="true"></i>  <?php echo $_SESSION['username'] ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -48,6 +49,7 @@
                                 echo '<li><a href="admin/index.php">Admin</a></li>';
                             };
                         ?>
+                        
                         <li><a href="logout.php" data-toggle="modal" data-target="#logoutmodal">LOG OUT</a></li>
                     </ul>
                 </li>

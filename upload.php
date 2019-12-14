@@ -7,7 +7,6 @@ if (!file_exists("uploads/")) {
 }
 $target_dir = "uploads/".$department."/";
 if (!file_exists($target_dir)) {
-  echo "doesn't exist";
   mkdir($target_dir);
 }
 $basefilename = preg_replace('/\s+/', '_', basename($_FILES["fileToUpload"] ["name"])); 
@@ -15,12 +14,12 @@ $target_file = $target_dir . $basefilename;
 $uploadOk = 1;
 //check if file already exists
 if (file_exists($target_file)) {
-    echo "Sorry, file already exists." . "<br>";
     $uploadOk = 0;
     header("Location: department.php?error=file_exists");
-  }else {
+  }
+
+  else {
     if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-      echo "The file " . $basefilename . " has been uploaded." . "<br>";
       
       include('mysql_conn.php');
       $filename = $basefilename;
@@ -30,10 +29,8 @@ if (file_exists($target_file)) {
       $stmt = $connection->prepare($sql);
       $stmt->execute(['filename' => $filename, 'user_id' => $user_id, 'department' => $department]);
       
-      echo "Post Added";
       header('Location: department.php?upload=success');
     } else {
-      echo "Sorry, there was an error uploading your file" . "<br>";
       header("Location: department.php?error=upload_error");
     }
   }

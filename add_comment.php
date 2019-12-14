@@ -5,12 +5,11 @@
 
         $content = $_POST['content'];
         $post_id = $_GET['id'];
-        $user_id = $_SESSION['user_id'];
+        $user_id = $_SESSION['user_id']; 
             
         $sql = 'INSERT INTO comments (content, post_id, user_id) VALUES (?, ?, ?)';
         $stmt = $connection->prepare($sql);
         $stmt->execute([$content, $post_id, $user_id]);
-        echo "Comment Added";
         header("Location: blog.php?success=comment_added");
     }
 ?>

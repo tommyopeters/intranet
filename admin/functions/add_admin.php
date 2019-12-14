@@ -7,7 +7,6 @@
         $userstmt = $connection->prepare($usersql);
         $userstmt->execute(['id' => $id]);
         if($userstmt->rowCount() < 1){
-            echo "Fatal error";
             header("Location: ../users.php?error=fatal");
         }else{
             $user = $userstmt->fetch();
@@ -18,14 +17,12 @@
             $emailstmt = $connection->prepare($emailsql);
             $emailstmt->execute(['email' => $email]);
             if($emailstmt->rowCount() > 0){
-                echo "Already admin";
                 header("Location: ../users.php?error=admin_exists");
             } else {
 
                 $sql = 'INSERT INTO admins (username, email) VALUES (:username, :email)';
                 $stmt = $connection->prepare($sql);
                 $stmt->execute(['username' => $username, 'email' => $email]);
-                echo "Admin Added";
                 header("Location: ../users.php?success=admin_added");
             }
         }

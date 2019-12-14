@@ -16,7 +16,7 @@ body {
 }
 #welcome h1 {
   /* color: #888; */
-  font-size: 70px;
+  font-size: 50px;
   padding: 2%;
   background-color: #222;
   color: #aaa;
@@ -33,6 +33,7 @@ body {
   position: fixed;
   height: 100%;
   overflow: auto;
+  font-size: 14px;
 }
 
 .sidebar a {
@@ -58,11 +59,19 @@ div.content {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  width: 100%;
+  width: 100%; 
   border: 1px solid #ddd;
   margin-top: 20px;
 }
-
+th{
+  font-size: 15px;
+}
+tr{
+  font-size: 14px;
+}
+.btn{
+  font-size: 14px;
+}
 th,
 td {
   text-align: left;
@@ -107,8 +116,8 @@ table tr:hover {
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 20px;
+  font-size: 12px;
+  padding: 10px 18px 10px 18px;
   border: 1px solid #ddd;
   margin-top: 20px;
 }
@@ -129,23 +138,58 @@ table tr:hover {
   width: 100%;
 }
 .postmodal .header {
-  font-size: 35px;
+  font-size: 20px;
 }
 .postmodal label {
-  font-size: 18px;
+  font-size: 10px;
 }
 .postmodal .title,
 textarea {
   border: 1px solid rgb(216, 215, 215);
 }
 .postmodal button {
-  margin-top: 10px;
+  margin-top: 10px; 
   margin-bottom: 10px;
   width: 15%;
 }
 .postmodal form {
   border: none;
 }
+.modal .modal-content .modal-header .modal-title{
+  font-size: 17px;
+}
+.modal .modal-content .modal-body label, input, select, textarea{
+  font-size: 15px;
+}
+.modal .modal-content .btn{
+  font-size: 14px;
+}
+.modal .modal-content .modal-body .modal-text{
+  font-size: 15px;
+}
+.lastbutton{
+  margin-bottom: 40px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
+
+
 
 /* MEDIA QUERIES */
 @media screen and (max-width: 568px) {
@@ -228,6 +272,9 @@ textarea {
   }
   div.content {
     margin-left: 0;
+  }
+  .sidebar a {
+    padding: 10px;
   }
 }
 

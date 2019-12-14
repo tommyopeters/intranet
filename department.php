@@ -1,4 +1,7 @@
-<?php include('login_check.php') ?>
+<?php
+session_start();
+include('check.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +21,14 @@
 <body>  
 <!-- Navigation -->
 <?php
-
-    include('header.php');
+include('header.php');
     $current_url = $_SERVER['REQUEST_URI'];
     include('mysql_conn.php');
     $getUploads = $connection->prepare("SELECT * FROM uploads where department=:department");
     $getUploads->execute(['department' => strtolower($_SESSION['department'])]);
     $uploads = $getUploads->fetchAll();
 
-    $getPosts = $connection->prepare("SELECT * FROM department_posts where department=:department");
+    $getPosts = $connection->prepare("SELECT * FROM department_posts where department=:department ORDER BY post_date DESC limit 5");
     $getPosts->execute(['department' => strtolower($_SESSION['department'])]);
     $posts = $getPosts->fetchAll(); 
 ?>

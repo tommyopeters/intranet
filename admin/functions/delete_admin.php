@@ -7,13 +7,11 @@
         $checkstmt = $connection->prepare($checksql);
         $checkstmt->execute(['id' => $id]);
         if($checkstmt->rowCount() < 1){
-            echo "Fatal error";
             header("Location: ../admin.php?error=fatal");
         }else{
                 $sql = 'DELETE FROM admins where id = :id';
                 $stmt = $connection->prepare($sql);
                 $stmt->execute(['id' => $id]);
-                echo "Admin Deleted";
                 header("Location: ../admin.php?success=admin_deleted");
         }
 

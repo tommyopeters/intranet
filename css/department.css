@@ -66,7 +66,7 @@ nav .navbar{
     color: #333;
   }
   .grid-container h1{
-      font-size: 25px;
+      font-size: 20px;
       border-bottom: 1px solid rgb(82, 81, 81);
   }
   .content .grid-item {
@@ -95,7 +95,7 @@ nav .navbar{
 	opacity: 0.6;
 	transition: 0.3s;
 	background-color: black;
-	font-size: 15px;
+	font-size: 14px;
 }
 .cbtn1{
     margin-right: 20px;
@@ -151,7 +151,9 @@ table button{
     border: none;
     background-color: #fff;
 }
-
+table tr{
+    font-size: 14px;
+}
 .department{
     /* border: 1px solid rgb(204, 203, 203); */
     /* border-radius: 20px; */
@@ -163,7 +165,7 @@ table button{
     background-color: rgb(253, 251, 251);
 }
 .department .text{
-    font-size: 25px;
+    font-size: 17px;
     background: #222;
     color: #aaa;
     padding: 8px;
@@ -178,7 +180,7 @@ table button{
 }
 .content{
     background-color: rgb(253, 251, 251);
-    padding: 50px 30px 20px 30px;
+    padding: 50px 40px 20px 40px;
 }
 .row{
     background-color: white;
@@ -196,7 +198,7 @@ table button{
 .content .row h2{
     /* padding-right: 500px; */
     /* border: 1px solid #000; */
-    font-size: 35px;
+    font-size: 20px;
     width: 100%;
     margin-top: 20px;
 }
@@ -213,7 +215,7 @@ table button{
     font-weight: normal;
     transition: 0.3s;
     opacity: 0.5;
-    font-size: 25px;
+    font-size: 20px;
 }
 .content .row .header{
     color: black !important;
@@ -261,7 +263,7 @@ table button{
 .content .row .button p{
     /* border: 1px solid black; */
     float: right;
-    font-size: 17px;
+    font-size: 14px;
     padding-top: 5px;
 }
 .content .row .button:hover{
@@ -270,19 +272,19 @@ table button{
 }
 .content .row p{
     /* float: right; */ 
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 0px;
 }
 .content .row .info a{
-    font-size: 16px;
+    font-size: 14px;
 }
 .content .row .button i{
     /* border: 1px solid #000; */
     color: rgb(139, 139, 139); 
-    font-size: 18px;
+    font-size: 14px;
 }
 .info a{
-    font-size: 15px;
+    font-size: 14px;
 }
 .modal-content .modal-body {
     display: grid;
@@ -294,16 +296,28 @@ table button{
     background-position: 10px 10px;
     background-repeat: no-repeat;
     width: 100%;
-    font-size: 16px;
-    padding: 12px 20px 12px 20px;
+    font-size: 13px;
+    padding: 10px 18px 10px 18px;
     border: 1px solid #ddd;
     margin-bottom: 10px;
+  }
+  .modal .modal-content .modal-header .modal-title{
+    font-size: 17px;
+  }
+  .modal .modal-content .modal-body label, input, select, textarea{
+    font-size: 15px;
+  }
+  .modal .modal-content .btn{
+    font-size: 14px;
+  }
+  .modal .modal-content .modal-body .modal-text{
+    font-size: 15px;
   }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 15px;
-  }
+  } 
 
   ::-webkit-scrollbar-track {
     background: #aaa;
@@ -327,7 +341,7 @@ footer .footer-cols{
 	grid-template-columns: repeat(2, 1fr);
 	padding: 2rem;
 	text-align: left;
-	font-size: 14px;
+	font-size: 12px;
 }
 footer .footer-cols ul{
     list-style: none;
@@ -341,7 +355,7 @@ footer .footer-cols ul li a:hover{
     transition: 0.5s;
 }
 footer .footer-cols ul li:first-child{
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	padding-bottom: 0.5rem;
 	border-bottom: #444 solid 1px;
 	margin-bottom: 1rem;
@@ -474,7 +488,7 @@ footer .col2{
 
 @media screen and (max-width: 992px){
 .modal-body {
-    display: grid;
+    display: grid; 
     grid-gap: 0px;
     grid-template-columns: auto;
 }

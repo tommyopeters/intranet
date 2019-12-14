@@ -1,6 +1,15 @@
-
 <?php 
-    include('mysql_conn.php');
+include('mysql_conn.php');
+session_start();
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location: ../login.php');
+}
+$adminsql = "SELECT * FROM admins WHERE email = :email";
+$adminstmt = $connection->prepare($adminsql);
+$adminstmt->execute(['email' => $_SESSION['email']]);
+if($adminstmt->rowCount() < 1){
+    header('Location: ../index.php');
+};
 ?>
 
 

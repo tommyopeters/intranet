@@ -1,4 +1,7 @@
-<?php include('login_check.php') ?>
+<?php
+session_start();
+include('check.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,20 +22,19 @@
 <body>
 
     <?php 
-        include('header.php');
-        include('mysql_conn.php');
-        $getPosts = $connection->prepare("SELECT * FROM posts ORDER BY post_date DESC limit 3");
-        $getPosts->execute();
-        $posts = $getPosts->fetchAll();
+    include('header.php');
+    include('mysql_conn.php');
+    $getPosts = $connection->prepare("SELECT * FROM posts ORDER BY post_date DESC limit 3");
+    $getPosts->execute();
+    $posts = $getPosts->fetchAll();
 
-        $getNotices = $connection->prepare("SELECT * FROM department_posts WHERE department = 'general' ORDER BY post_date DESC limit 10");
-        $getNotices->execute();
-        $notices = $getNotices->fetchAll();
+    $getNotices = $connection->prepare("SELECT * FROM department_posts WHERE department = 'general' ORDER BY post_date DESC limit 10");
+    $getNotices->execute();
+    $notices = $getNotices->fetchAll();
 
-        
-        $getEvents = $connection->prepare("SELECT * FROM events ORDER BY start_event ASC limit 5");
-        $getEvents->execute();
-        $events = $getEvents->fetchAll();
+    $getEvents = $connection->prepare("SELECT * FROM events ORDER BY start_event ASC limit 5");
+    $getEvents->execute();
+    $events = $getEvents->fetchAll();
     ?>
     <!-- Header --> 
 

@@ -1,5 +1,6 @@
 <?php
-    include('admin_check.php');
+include('log-out.php');
+include('mysql_conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +17,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>BTM Circle</title>
+    <title>Blog</title>
 </head>
 <body>
 
 <?php
-    include('log-out.php');
-    include('mysql_conn.php');
-    include('sidebar_menu.php');
-
+include('sidebar_menu.php');
     $getPosts = $connection->prepare("SELECT * FROM posts");
     $getPosts->execute();
     $posts = $getPosts->fetchAll(); 
@@ -57,9 +55,9 @@
     }
 ?>
 
-    <div class="content">
+    <div class="content" style="overflow-x:auto">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for blog post.." title="Type in a name">
-        <table class="table" id="myTable">
+        <table class="table table-responsive" id="myTable">
             <tr class="header">
                 <th>Blog Posts</th>
                 <th>Date Posted</th>
@@ -79,7 +77,7 @@
                 }
             ?>
         </table>
-        <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#postmodal">Add Post</a>
+        <a href="" class="btn btn-info btn-responsive lastbutton" data-toggle="modal" data-target="#postmodal">Add Post</a>
     </div>
     
 

@@ -1,4 +1,7 @@
-<?php include('login_check.php') ?>
+<?php
+include('mysql_conn.php');
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +19,11 @@
 </head>
 <body>
     <?php
+        session_start();
+        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+            header('Location: login.php'); 
+        }
+
         //FORM SUBMISSION INPUTS CHECK
         if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password-prev']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password-prev'])){
             $username = $_POST['username'];
@@ -561,6 +569,8 @@
                         <option value="front-desk">Front Desk</option>
                         <option value="it">IT</option>
                         <option value="operations">Operations</option>
+                        <option value="general">General</option>
+                        <option value="business-management">Business Management</option>
                         <option value="accounts">Accounts</option>
                         <option value="sales-and-marketing">Sales & Marketing</option>
                         <option value="hr">HR</option>

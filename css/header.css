@@ -6,9 +6,9 @@
 	--secondary-color-hover: #143f85;
 	--primary-color: #b50415;
 	--light-color: rgb(244, 244, 244);
-}
+} 
 body{
-    font-family: 'Baskervville', serif;
+    font-family: 'Baskervville', serif; 
 } 
 nav .navbar{
     background-color: #fff;
@@ -18,10 +18,10 @@ nav .navbar{
     width: 100%;
 }
 .navbar .navbar-brand img{
-    width: 40%;
+    width: 30%;
 }
 .navbar-item{
-    margin-right: 40px;
+    margin-right: 35px;
     color: black;
     text-decoration: none;
 }
@@ -32,7 +32,7 @@ nav .navbar{
 }
 .navbar li a{
     color: black;
-    font-size: 20px;
+    font-size: 17px;
     transition: 0.3s;
     margin-bottom: 2px;
 }

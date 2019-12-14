@@ -1,48 +1,6 @@
 <?php
-  session_start();
-  if(isset($_SESSION['username'])){
-    header("Location: index.php");
-  }
-?>
-<?php
-  include('mysql_conn.php');
-
-  if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-
-      $sql = "SELECT * FROM workers WHERE email = :email";
-      $stmt = $connection->prepare($sql);
-      $stmt->execute(['email' => $email]);
-      if($stmt->rowCount() < 1){
-          echo "<p class='text-danger'>Wrong Email</p>";
-      } else {
-          $data = $stmt->fetch(PDO::FETCH_ASSOC);
-      if ($data['password'] == $password){
-              echo '
-              <script>
-                $.ajax({
-                  url:"session.php",
-                  type:"POST",
-                  data:{
-                    loggedin: true,
-                    user_id: '.$data['id'].',
-                    username: "'.$data['username'].'",
-                    email: "'.$data['email'].'",
-                    department: "'.$data['department'].'",
-                  },
-                  success:function(){
-                    window.location.href = "index.php";
-                  }
-                })
-              </script>
-              ';
-
-      } else{
-          echo "<p class='text-danger'>Wrong password</p>";
-      }
-      }
-  }
+include('mysql_conn.php');
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +12,6 @@
 <!-- Useful Links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/login.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <title>LOGIN</title>
 </head>
@@ -63,14 +20,9 @@
 
     </div>
     <div class="bg-text">
-      <h1>Welcome to BTM Circle.</h1>
-      <div class="message"></div>
-
-      
+      <h1>Welcome to BTM Circle</h1>
 
 <?php
-include('mysql_conn.php');
-
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -83,25 +35,13 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     } else {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($data['password'] == $password){
-            echo '
-            <script>
-              $.ajax({
-                url:"session.php",
-                type:"POST",
-                data:{
-                  loggedin: true,
-                  user_id: '.$data['id'].',
-                  username: "'.$data['username'].'",
-                  email: "'.$data['email'].'",
-                  department: "'.$data['department'].'",
-                },
-                success:function(){
-                  window.location.href = "index.php";
-                }
-              })
-            </script>
-            ';
-
+        session_start();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user_id'] = $data['id'];
+                $_SESSION['username'] = $data['username'];
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['department'] = $data['department'];
+        header('Location: ./index.php');
     } else{
         echo "<p class='text-danger'>Wrong password</p>";
     }

@@ -21,7 +21,6 @@
 
 
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
                 header("Location: ../blog.php?error=invalid_file");
             }else{
                 if (file_exists($target_file)) {
@@ -30,17 +29,14 @@
                 }
 
                 if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file " . $basefilename . " has been uploaded." . "<br>";
                     $filename = $basefilename;
                     
                     $sql = "UPDATE posts SET post_title=?, post_description=?, post_content=?, post_image=? WHERE id=?";
                     $stmt = $connection->prepare($sql);
                     $stmt->execute([$post_title, $post_description,$post_content, $filename, $post_id]);
 
-                    echo "Post edited and image added";
                     header('Location: ../blog.php?success=post_edited');
                 } else {
-                    echo "Sorry, there was an error uploading your file" . "<br>";
                     header("Location: ../blog.php?error=upload_error");
                 }
                 
@@ -52,7 +48,6 @@
             $stmt = $connection->prepare($sql);
             $stmt->execute([$post_title, $post_description,$post_content, $post_id]);
 
-            echo "Post edited";
             header('Location: ../blog.php?success=post_edited');
         }
     }

@@ -12,8 +12,7 @@
         $sql = "INSERT INTO department_posts (post_title, post_description, post_content, department) VALUES (:title, :description, :content, :department)";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['title' => $post_title, 'description' => $post_description, 'content' => $post_content,  'department' => $department]);
-
-        echo "Post added";
+        
         header("Location: ../posts.php?success=post_added");
     }
 ?>

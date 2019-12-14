@@ -20,7 +20,6 @@
 
 
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
                 header("Location: ../blog.php?error=invalid_file");
             }else{
                 if (file_exists($target_file)) {
@@ -29,17 +28,14 @@
                 }
 
                 if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file " . $basefilename . " has been uploaded." . "<br>";
                     $filename = $basefilename;
                     
                     $sql = 'INSERT INTO posts (post_title, post_description, post_content, post_image, post_user_id) VALUES(:title, :description, :content, :image, :user_id)';
                     $stmt = $connection->prepare($sql);
                     $stmt->execute(['title' => $post_title, 'description' => $post_description, 'content' => $post_content, 'image' => $filename, 'user_id' => $user_id]);
                     
-                    echo "Post Added";
                     header('Location: ../blog.php?success=post_added');
                 } else {
-                    echo "Sorry, there was an error uploading your file" . "<br>";
                     header("Location: ../blog.php?error=upload_error");
                 }
             }
@@ -50,7 +46,6 @@
             $stmt = $connection->prepare($sql);
             $stmt->execute(['title' => $post_title, 'description' => $post_description, 'content' => $post_content,  'user_id' => $user_id]);
 
-            echo "Post added";
             header('Location: ../blog.php?success=post_added');
         }
     } 

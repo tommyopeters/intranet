@@ -33,6 +33,7 @@ body {
   position: fixed;
   height: 100%;
   overflow: auto;
+  font-size: 14px;
 }
 
 .sidebar a {
@@ -84,6 +85,18 @@ textarea {
 .postmodal form {
   border: none;
 }
+.modal .modal-content .modal-header .modal-title{
+  font-size: 17px;
+}
+.modal .modal-content .modal-body label, input, select, textarea{
+  font-size: 15px;
+}
+.modal .modal-content .btn{
+  font-size: 14px;
+}
+.modal .modal-content .modal-body .modal-text{
+  font-size: 15px;
+}
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
@@ -95,7 +108,15 @@ table {
   border: 1px solid #ddd;
   margin-top: 20px;
 }
-
+th{
+  font-size: 15px;
+}
+tr{
+  font-size: 14px;
+}
+.btn{
+  font-size: 14px;
+}
 th,
 td {
   text-align: left;
@@ -120,17 +141,40 @@ table tr:hover {
 .content table .btn i:hover {
   color: #aaa;
   transition: 0.3s;
-}
+} 
 #myInput {
   background-image: url("/css/searchicon.png");
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 20px;
+  font-size: 12px;
+  padding: 10px 18px 10px 18px;
   border: 1px solid #ddd;
   margin-top: 20px;
 }
+.lastbutton{
+  margin-bottom: 40px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
+
+
 
 /* MEDIA QUERIES */
 @media screen and (max-width: 568px) {
@@ -210,6 +254,12 @@ table tr:hover {
   }
   .sidebar a {
     float: left;
+  }
+  div.content {
+    margin-left: 0;
+  }
+  .sidebar a {
+    padding: 10px;
   }
 }
 

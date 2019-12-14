@@ -5,7 +5,7 @@
 	--secondary-color: #103063;
 	--secondary-color-hover: #143f85;
 	--primary-color: #b50415;
-	--light-color: #f4f4f4;
+	--light-color: #f4f4f4; 
 }
 body{
     font-family: 'Baskervville', serif;
@@ -40,7 +40,7 @@ nav .navbar{
     opacity: 0.4;
 }
 .dropdown-menu{
-    padding: 10px;
+    padding: 10px; 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #000;
 }
@@ -62,7 +62,7 @@ nav .navbar{
 .content .row h2{
     /* padding-right: 500px; */
     /* border: 1px solid #000; */
-    font-size: 35px;
+    font-size: 2px;
     margin-top: 20px;
     width: 100%;
 }
@@ -78,7 +78,7 @@ nav .navbar{
     font-weight: normal;
     transition: 0.3s;
     opacity: 0.5;
-    font-size: 25px;
+    font-size: 20px;
 }
 .content .row .header{
     color: black !important;
@@ -129,19 +129,20 @@ nav .navbar{
 .content .row .button p{
     /* border: 1px solid black; */
     float: right;
-    font-size: 17px;
+    font-size: 14px;
     padding-top: 5px;
 }
 .content .row p{
     float: right;
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 0px;
 }
 .content .row .info a{
-    font-size: 16px;
+    font-size: 14px;
+    width: 100%;
 }
 .content .row .button i{
-    font-size: 18px;
+    font-size: 14px;
     color: rgb(139, 139, 139); 
 }
 .content .row i{
@@ -154,7 +155,8 @@ nav .navbar{
     border: none;
 }
 .info a{
-    font-size: 15px;
+    font-size: 14px;
+    width: 100%;
 }
 .modal-text::first-letter {
     font-size: 200%;
@@ -175,7 +177,7 @@ nav .navbar{
     color: #333;
 }
 .grid-container:nth-of-type(2) h1{
-    font-size: 25px;
+    font-size: 20px;
     /* border-bottom: 1px solid rgb(82, 81, 81); */
 }
 .grid-container:nth-of-type(3) {
@@ -186,7 +188,7 @@ nav .navbar{
     color: #333;
 }
 .grid-container:nth-of-type(3) h1{
-    font-size: 25px;
+    font-size: 20px;
     /* border-bottom: 1px solid rgb(82, 81, 81); */
 }
 .grid-container:nth-of-type(4) {
@@ -197,7 +199,7 @@ nav .navbar{
     color: #333;
 }
 .grid-container:nth-of-type(4) h1{
-    font-size: 25px;
+    font-size: 20px;
     /* border-bottom: 1px solid rgb(82, 81, 81); */
 }
 .two {
@@ -231,10 +233,22 @@ padding: 20px;
     background-position: 10px 10px;
     background-repeat: no-repeat;
     width: 100%;
-    font-size: 16px;
-    padding: 12px 20px 12px 20px;
+    font-size: 14px;
+    padding: 10px 18px 10px 18px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
+  }
+  .modal .modal-content .modal-header .modal-title{
+    font-size: 17px;
+  }
+  .modal .modal-content .modal-body label, input, select, textarea{
+    font-size: 15px;
+  }
+  .modal .modal-content .btn{
+    font-size: 14px;
+  }
+  .modal .modal-content .modal-body .modal-text{
+    font-size: 15px;
   }
 
 

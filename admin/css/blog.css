@@ -33,6 +33,7 @@ body {
   position: fixed;
   height: 100%;
   overflow: auto;
+  font-size: 14px;
 }
 
 .sidebar a {
@@ -95,7 +96,15 @@ table {
   border: 1px solid #ddd;
   margin-top: 20px;
 }
-
+th{
+  font-size: 15px;
+}
+tr{
+  font-size: 14px;
+}
+.btn{
+  font-size: 14px;
+}
 th,
 td {
   text-align: left;
@@ -119,18 +128,53 @@ table tr:hover {
 }
 .content table .btn i:hover {
   color: #aaa;
-  transition: 0.3s;
+  transition: 0.3s; 
 }
 #myInput {
   background-image: url("/css/searchicon.png");
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
-  font-size: 16px;
+  font-size: 12px;
   padding: 12px 20px 12px 20px;
   border: 1px solid #ddd;
   margin-top: 20px;
 }
+.lastbutton{
+  margin-bottom: 40px;
+}
+.modal .modal-content .modal-header .modal-title{
+  font-size: 17px;
+}
+.modal .modal-content .modal-body label, input, select, textarea{
+  font-size: 15px;
+}
+.modal .modal-content .btn{
+  font-size: 14px;
+}
+.modal .modal-content .modal-body .modal-text{
+  font-size: 15px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64); 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
+
+
 
 /* MEDIA QUERIES */
 @media screen and (max-width: 568px) {
@@ -211,6 +255,12 @@ table tr:hover {
   .sidebar a {
     float: left;
   }
+  div.content {
+    margin-left: 0;
+  }
+  .sidebar a {
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -225,23 +275,3 @@ select {
   padding: 5px;
 }
 
-/*When the modal fills the screen it has an even 2.5% on top and bottom*/
-/*Centers the modal*/
-.modal-dialog {
-  margin: 2.5vh auto;
-}
-
-/*Sets the maximum height of the entire modal to 95% of the screen height*/
-.modal-content {
-  max-height: 95vh;
-  overflow: scroll;
-}
-
-/*Sets the maximum height of the modal body to 90% of the screen height*/
-.modal-body {
-  max-height: 90vh;
-}
-/*Sets the maximum height of the modal image to 69% of the screen height*/
-.modal-body img {
-  max-height: 69vh;
-}

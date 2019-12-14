@@ -13,7 +13,6 @@
         $stmt = $connection->prepare($sql);
         $stmt->execute([$post_title, $post_description,$post_content,$department, $post_id]);
 
-        echo "Post edited";
         header("Location: ../posts.php?success=post_edited");   
     }
 

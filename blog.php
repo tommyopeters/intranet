@@ -1,4 +1,8 @@
-<?php include('login_check.php') ?>
+<?php
+session_start();
+include('mysql_conn.php');
+include('check.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +20,7 @@
 <body>
 
 <?php
-    include('header.php');
-    include('mysql_conn.php');
+include('header.php');
     $getPosts = $connection->prepare("SELECT * FROM posts");
     $getPosts->execute();
     $posts = $getPosts->fetchAll(); 

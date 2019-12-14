@@ -1,5 +1,6 @@
 <?php
-    include('admin_check.php');
+include('log-out.php');
+include('mysql_conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +22,7 @@
 <body>
 
 <?php
-    include('log-out.php');
-    include('mysql_conn.php');
-    include('sidebar_menu.php');
-
+include('sidebar_menu.php');
     $getUsers = $connection->prepare("SELECT * FROM workers");
     $getUsers->execute();
     $users = $getUsers->fetchAll(); 
@@ -64,7 +62,7 @@
     }
 
 ?>
-    <div class="content">
+    <div class="content" style="overflow-x:auto">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for User.." title="Type in a name">
         <table class="table" id="myTable">
             <tr class="header">
@@ -103,7 +101,7 @@
                 }
             ?>
         </table>
-        <a href="" class="btn btn-info btn-responsive" data-toggle="modal" data-target="#usermodal">Add User</a>
+        <a href="" class="btn btn-info btn-responsive lastbutton" data-toggle="modal" data-target="#usermodal">Add User</a>
     </div>
     
 
@@ -137,6 +135,8 @@ aria-hidden="true">
                             <option value="front-desk">Front Desk</option>
                             <option value="it">IT</option>
                             <option value="operations">Operations</option>
+                            <option value="general">General</option>
+                            <option value="business-management">Business Management</option>
                             <option value="accounts">Accounts</option>
                             <option value="sales-and-marketing">Sales & Marketing</option>
                             <option value="hr">HR</option>
